@@ -61,7 +61,7 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
               <p className="italic text-indigo-600 mt-1">"What is our top automation priority?"</p>
             </div>
           )}
-          {messages.map(m => (
+          {messages.map((m: any) => (
             <div key={m.id} className={`flex gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === 'user' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-700'}`}>
                 {m.role === 'user' ? <User size={16} /> : <Bot size={16} />}
