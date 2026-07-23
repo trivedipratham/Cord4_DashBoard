@@ -5,7 +5,7 @@ import { IngestionResult, Activity, Employee } from "@/lib/data";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid } from 'recharts';
 import ChatWidget from "./ChatWidget";
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
+const COLORS = ['#1e3a8a', '#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd'];
 
 export default function Dashboard({ data }: { data: IngestionResult }) {
   const [selectedDept, setSelectedDept] = useState<string | null>(null);
@@ -164,13 +164,13 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   };
 
   return (
-    <div className="min-h-screen relative pb-20">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 relative pb-20 font-sans">
       <div className="p-8 max-w-7xl mx-auto space-y-8" ref={dashboardRef}>
         
         {/* Header & Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-slate-200 mb-6">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-800">Automation Insights</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">Automation Insights</h1>
             <p className="text-slate-500 text-sm mt-1">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
           </div>
           
@@ -253,11 +253,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <div className="flex-1 min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={wowTrend}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="week" axisLine={false} tickLine={false} tick={{fill: '#94a3b8'}} dy={10} />
-                  <YAxis unit="%" axisLine={false} tickLine={false} tick={{fill: '#94a3b8'}} dx={-10} />
-                  <Tooltip formatter={(value: any) => `${value.toFixed(1)}%`} contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                  <Line type="monotone" dataKey="repetitiveShare" stroke="#6366f1" strokeWidth={4} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6, strokeWidth: 0 }} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                  <XAxis dataKey="week" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} dy={10} />
+                  <YAxis unit="%" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} dx={-10} />
+                  <Tooltip formatter={(value: any) => `${value.toFixed(1)}%`} contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05)' }} />
+                  <Line type="monotone" dataKey="repetitiveShare" stroke="#0f172a" strokeWidth={3} dot={{ r: 4, strokeWidth: 2, fill: '#fff' }} activeDot={{ r: 6, strokeWidth: 0, fill: '#0f172a' }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
