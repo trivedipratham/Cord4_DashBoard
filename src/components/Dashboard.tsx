@@ -11,6 +11,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   const [selectedDept, setSelectedDept] = useState<string | null>(null);
   const [selectedTaskCategory, setSelectedTaskCategory] = useState<string | null>(null);
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
+  const [timeSinkView, setTimeSinkView] = useState<'app' | 'category' | 'department'>('app');
   const dashboardRef = useRef<HTMLDivElement>(null);
 
   // Filtered activities based on global cross-filters
@@ -40,14 +41,17 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
     return { totalHoursSaved: hours, totalINRSaved: inr };
   }, [filteredActivities, data.employees]);
 
-  // Time sink breakdown by App
-  const appBreakdown = useMemo(() => {
+  // Time sink breakdown switchable
+  const timeSinkBreakdown = useMemo(() => {
     const map: Record<string, number> = {};
     filteredActivities.forEach(a => {
-      map[a.appUsed] = (map[a.appUsed] || 0) + a.durationMinutes;
+      let key = a.appUsed;
+      if (timeSinkView === 'category') key = a.taskCategory;
+      if (timeSinkView === 'department') key = a.department;
+      map[key] = (map[key] || 0) + a.durationMinutes;
     });
     return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 6);
-  }, [filteredActivities]);
+  }, [filteredActivities, timeSinkView]);
 
   // Automation Priority Ranking
   const automationPriority = useMemo(() => {
@@ -202,51 +206,64 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white shadow-sm rounded-xl p-6 border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
-            <div className="flex items-end mt-2">
-              <p className="text-5xl font-black text-indigo-600">{totalHoursSaved.toFixed(1)}</p>
-              <span className="text-slate-400 ml-2 mb-1 font-medium">hrs</span>
+          <div className="bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-200 rounded-2xl p-6 border border-indigo-400/30 text-white relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
-            <p className="text-xs text-slate-400 mt-3">Methodology: (Repetitive Minutes * 60% automation potential) / 60</p>
+            <h2 className="text-sm font-bold text-indigo-100 uppercase tracking-widest">Hours Recoverable (Monthly)</h2>
+            <div className="flex items-end mt-4">
+              <p className="text-6xl font-black">{totalHoursSaved.toFixed(1)}</p>
+              <span className="text-indigo-200 ml-2 mb-2 font-semibold">hrs</span>
+            </div>
+            <p className="text-xs text-indigo-200 mt-4 opacity-80">Methodology: (Repetitive Minutes * 60% automation potential) / 60</p>
           </div>
           
-          <div className="bg-white shadow-sm rounded-xl p-6 border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
-            <div className="flex items-end mt-2">
-              <p className="text-5xl font-black text-emerald-600">₹{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200 rounded-2xl p-6 border border-emerald-400/30 text-white relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
-            <p className="text-xs text-slate-400 mt-3">Methodology: Hours saved × Employee's estimated hourly rate</p>
+            <h2 className="text-sm font-bold text-emerald-100 uppercase tracking-widest">Value Recoverable (Monthly)</h2>
+            <div className="flex items-end mt-4">
+              <p className="text-6xl font-black">₹{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+            </div>
+            <p className="text-xs text-emerald-200 mt-4 opacity-80">Methodology: Hours saved × Employee's estimated hourly rate</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Chart: Time Sink by App */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 className="font-bold text-slate-700 mb-4">Time Sink by Application</h3>
-            <div className="h-64">
+          {/* Chart: Time Sink by Dimension */}
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="font-bold text-slate-800 text-lg">Time Sink Breakdown</h3>
+              <div className="flex bg-slate-100 p-1 rounded-lg">
+                <button onClick={() => setTimeSinkView('app')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${timeSinkView === 'app' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}>App</button>
+                <button onClick={() => setTimeSinkView('category')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${timeSinkView === 'category' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}>Category</button>
+                <button onClick={() => setTimeSinkView('department')} className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${timeSinkView === 'department' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}>Dept</button>
+              </div>
+            </div>
+            <div className="flex-1 min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie data={appBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                    {appBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
+                  <Pie data={timeSinkBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={90} paddingAngle={2} label>
+                    {timeSinkBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                   </Pie>
-                  <Tooltip formatter={(value: any) => `${(value/60).toFixed(1)} hrs`} />
+                  <Tooltip formatter={(value: any) => `${(value/60).toFixed(1)} hrs`} contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* Chart: WoW Trend */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 className="font-bold text-slate-700 mb-4">Repetitive Task Share Trend (WoW)</h3>
-            <div className="h-64">
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+            <h3 className="font-bold text-slate-800 text-lg mb-6">Repetitive Task Share (WoW)</h3>
+            <div className="flex-1 min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={wowTrend}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
-                  <XAxis dataKey="week" axisLine={false} tickLine={false} />
-                  <YAxis unit="%" axisLine={false} tickLine={false} />
-                  <Tooltip formatter={(value: any) => `${value.toFixed(1)}%`} />
-                  <Line type="monotone" dataKey="repetitiveShare" stroke="#00C49F" strokeWidth={3} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="week" axisLine={false} tickLine={false} tick={{fill: '#94a3b8'}} dy={10} />
+                  <YAxis unit="%" axisLine={false} tickLine={false} tick={{fill: '#94a3b8'}} dx={-10} />
+                  <Tooltip formatter={(value: any) => `${value.toFixed(1)}%`} contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                  <Line type="monotone" dataKey="repetitiveShare" stroke="#6366f1" strokeWidth={4} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6, strokeWidth: 0 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -254,21 +271,24 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Priority Ranking Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="p-6 border-b border-slate-100 flex justify-between items-center">
-            <h3 className="font-bold text-slate-700">Automation Priority Ranking</h3>
-            <span className="text-xs text-slate-500">Score = (Vol * Rep% * Conc) + Cost/1k</span>
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+              <h3 className="font-bold text-slate-800 text-lg">Automation Priority Ranking</h3>
+              <p className="text-sm text-slate-500">Click a category to filter the employee list below.</p>
+            </div>
+            <span className="text-xs font-mono bg-slate-100 text-slate-500 px-3 py-1.5 rounded-lg border border-slate-200">Score = (Vol * Rep% * Conc) + Cost/1k</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-500">
+              <thead className="bg-slate-50/50 text-slate-500 border-b border-slate-100">
                 <tr>
-                  <th className="px-6 py-3 font-medium">Task Category</th>
-                  <th className="px-6 py-3 font-medium">Volume (Hrs)</th>
-                  <th className="px-6 py-3 font-medium">Repetitive %</th>
-                  <th className="px-6 py-3 font-medium">Impacted Staff</th>
-                  <th className="px-6 py-3 font-medium">Cost Impact (₹)</th>
-                  <th className="px-6 py-3 font-medium">Priority Score</th>
+                  <th className="px-6 py-4 font-semibold">Task Category</th>
+                  <th className="px-6 py-4 font-semibold">Volume (Hrs)</th>
+                  <th className="px-6 py-4 font-semibold">Repetitive %</th>
+                  <th className="px-6 py-4 font-semibold">Impacted Staff</th>
+                  <th className="px-6 py-4 font-semibold">Cost Impact (₹)</th>
+                  <th className="px-6 py-4 font-semibold">Priority Score</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -303,8 +323,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Employee Drill-Down */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <h3 className="font-bold text-slate-700 mb-4">Employee Drill-down (Cross-filtered)</h3>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+          <div className="flex items-center gap-3 mb-6">
+            <h3 className="font-bold text-slate-800 text-lg">Employee Drill-down</h3>
+            {selectedTaskCategory && <span className="text-xs bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium shadow-sm">Filtered by: {selectedTaskCategory}</span>}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Show employees who participate in the filtered dataset */}
             {Array.from(new Set(filteredActivities.map(a => a.employeeId))).slice(0, 12).map(empId => {
