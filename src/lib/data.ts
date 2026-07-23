@@ -189,7 +189,7 @@ export function getCleanData(): IngestionResult {
     });
   }
 
-  cachedData = {
+  const result: IngestionResult = {
     employees: employeesMap,
     activities,
     stats: {
@@ -201,5 +201,7 @@ export function getCleanData(): IngestionResult {
     }
   };
 
-  return cachedData;
+  cachedData = result;
+
+  return result;
 }
