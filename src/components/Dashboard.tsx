@@ -113,7 +113,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
       const diffTime = Math.abs(d.getTime() - startDate.getTime());
       const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
       const weekNum = Math.floor(diffDays / 7) + 1;
-      const wKey = \`Week \${weekNum}\`;
+      const wKey = `Week ${weekNum}`;
       
       if (!weeklyBuckets[wKey]) weeklyBuckets[wKey] = { total: 0, repetitive: 0 };
       weeklyBuckets[wKey].total += weeks[dateStr].total;
@@ -204,7 +204,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm">
             <h3 className="text-amber-800 font-bold text-sm uppercase">Anomaly Detected</h3>
             <p className="text-amber-700 text-sm mt-1">
-              <strong>{anomaly.name} ({anomaly.dept})</strong> has logged {anomaly.nonRepHrs} hours of non-repetitive work, which is highly atypical (>80% manual variance). Consider reviewing their workflow to see if new processes are missing standardized tools.
+              <strong>{anomaly.name} ({anomaly.dept})</strong> has logged {anomaly.nonRepHrs} hours of non-repetitive work, which is highly atypical (&gt;80% manual variance). Consider reviewing their workflow to see if new processes are missing standardized tools.
             </p>
           </div>
         )}
@@ -239,7 +239,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                   <Pie data={appBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                     {appBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                   </Pie>
-                  <Tooltip formatter={(value: number) => \`\${(value/60).toFixed(1)} hrs\`} />
+                  <Tooltip formatter={(value: number) => `${(value/60).toFixed(1)} hrs`} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -254,7 +254,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
                   <XAxis dataKey="week" axisLine={false} tickLine={false} />
                   <YAxis unit="%" axisLine={false} tickLine={false} />
-                  <Tooltip formatter={(value: number) => \`\${value.toFixed(1)}%\`} />
+                  <Tooltip formatter={(value: number) => `${value.toFixed(1)}%`} />
                   <Line type="monotone" dataKey="repetitiveShare" stroke="#00C49F" strokeWidth={3} />
                 </LineChart>
               </ResponsiveContainer>
@@ -296,7 +296,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <div className="w-16 bg-slate-200 h-2 rounded-full overflow-hidden">
-                          <div className="bg-indigo-500 h-full" style={{ width: \`\${task.repetitivePercent}%\` }}></div>
+                          <div className="bg-indigo-500 h-full" style={{ width: `${task.repetitivePercent}%` }}></div>
                         </div>
                         {task.repetitivePercent.toFixed(0)}%
                       </div>
@@ -334,7 +334,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                       <span className="font-medium">{pct.toFixed(0)}%</span>
                     </div>
                     <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                      <div className={\`h-full \${pct > 70 ? 'bg-rose-500' : 'bg-emerald-500'}\`} style={{ width: \`\${pct}%\` }}></div>
+                      <div className={`h-full ${pct > 70 ? 'bg-rose-500' : 'bg-emerald-500'}`} style={{ width: `${pct}%` }}></div>
                     </div>
                   </div>
                 </div>

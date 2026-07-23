@@ -32,13 +32,13 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
       {/* Floating Button */}
       <button 
         onClick={() => setIsOpen(true)}
-        className={\`fixed bottom-6 right-6 h-14 w-14 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-indigo-700 transition-transform \${isOpen ? 'scale-0' : 'scale-100'}\`}
+        className={`fixed bottom-6 right-6 h-14 w-14 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-indigo-700 transition-transform ${isOpen ? 'scale-0' : 'scale-100'}`}
       >
         <MessageCircle size={28} />
       </button>
 
       {/* Chat Window */}
-      <div className={\`fixed bottom-6 right-6 w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col transition-all duration-300 transform origin-bottom-right \${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}\`} style={{ height: '500px', zIndex: 50 }}>
+      <div className={`fixed bottom-6 right-6 w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col transition-all duration-300 transform origin-bottom-right ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`} style={{ height: '500px', zIndex: 50 }}>
         
         {/* Header */}
         <div className="bg-indigo-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
@@ -61,11 +61,11 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
             </div>
           )}
           {messages.map(m => (
-            <div key={m.id} className={\`flex gap-3 \${m.role === 'user' ? 'flex-row-reverse' : ''}\`}>
-              <div className={\`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 \${m.role === 'user' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-700'}\`}>
+            <div key={m.id} className={`flex gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === 'user' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-700'}`}>
                 {m.role === 'user' ? <User size={16} /> : <Bot size={16} />}
               </div>
-              <div className={\`px-4 py-2 rounded-2xl max-w-[80%] text-sm \${m.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-sm' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-sm shadow-sm'}\`}>
+              <div className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm ${m.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-sm' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-sm shadow-sm'}`}>
                 {m.content}
               </div>
             </div>
