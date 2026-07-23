@@ -3,8 +3,6 @@
 import { useState, useMemo, useRef } from "react";
 import { IngestionResult, Activity, Employee } from "@/lib/data";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid } from 'recharts';
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import ChatWidget from "./ChatWidget";
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
@@ -157,15 +155,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
     return outlier;
   }, [data.activities, data.employees]);
 
-  const exportPDF = async () => {
-    if (!dashboardRef.current) return;
-    const canvas = await html2canvas(dashboardRef.current, { scale: 1.5 });
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("Executive_Summary.pdf");
+  const exportPDF = () => {
+    window.print();
   };
 
   return (
@@ -181,7 +172,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           
           <div className="flex gap-4 mt-4 md:mt-0">
             <select 
-              className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium"
+              className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium print:hidden"
               value={selectedDept || ""}
               onChange={(e) => setSelectedDept(e.target.value || null)}
             >
@@ -192,7 +183,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             </select>
             <button 
               onClick={exportPDF}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors print:hidden"
             >
               Export PDF
             </button>

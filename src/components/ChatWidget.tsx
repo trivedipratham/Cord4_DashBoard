@@ -33,13 +33,13 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
       {/* Floating Button */}
       <button 
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 h-14 w-14 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-indigo-700 transition-transform ${isOpen ? 'scale-0' : 'scale-100'}`}
+        className={`fixed bottom-6 right-6 h-14 w-14 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-indigo-700 transition-transform print:hidden ${isOpen ? 'scale-0' : 'scale-100'}`}
       >
         <MessageCircle size={28} />
       </button>
 
       {/* Chat Window */}
-      <div className={`fixed bottom-6 right-6 w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col transition-all duration-300 transform origin-bottom-right ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`} style={{ height: '500px', zIndex: 50 }}>
+      <div className={`fixed bottom-6 right-6 w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col transition-all duration-300 transform origin-bottom-right print:hidden ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`} style={{ height: '500px', zIndex: 50 }}>
         
         {/* Header */}
         <div className="bg-indigo-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
