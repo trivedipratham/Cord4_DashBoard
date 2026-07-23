@@ -19,7 +19,8 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
     }
   } as any) as any;
   
-  const { messages, append, isLoading } = chatState;
+  const { messages, sendMessage, status } = chatState;
+  const isLoading = status === 'submitted' || status === 'streaming';
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -33,7 +34,9 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
     e.preventDefault();
     if (!localInput.trim() || isLoading) return;
     
-    append({ role: 'user', content: localInput });
+    if (sendMessage) {
+        sendMessage({ role: 'user', content: localInput });
+    }
     setLocalInput("");
   };
 
