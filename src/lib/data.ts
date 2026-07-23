@@ -128,7 +128,7 @@ export function getCleanData(): IngestionResult {
     if (!employeesMap[empId]) {
       employeesMap[empId] = {
         id: empId,
-        name: \`Unknown Employee (\${empId})\`,
+        name: `Unknown Employee (${empId})`,
         department: row.department?.trim() || 'Unknown',
         role: 'Unknown',
         salaryMonthlyINR: 0,
@@ -168,7 +168,7 @@ export function getCleanData(): IngestionResult {
         const parts = dateStr.split(/[\/\s:]/);
         if (parts.length >= 3) {
             if (parts[2].length === 4) { // dd/mm/yyyy
-                timestampObj = new Date(\`\${parts[2]}-\${parts[1]}-\${parts[0]}T\${parts[3] || '00'}:\${parts[4] || '00'}:00Z\`);
+                timestampObj = new Date(`${parts[2]}-${parts[1]}-${parts[0]}T${parts[3] || '00'}:${parts[4] || '00'}:00Z`);
                 activitiesFixed++;
             }
         }
