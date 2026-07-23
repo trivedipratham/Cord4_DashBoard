@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useMemo, useRef } from "react";
-import { IngestionResult, Activity, Employee } from "@/lib/data";
+import type { IngestionResult, Activity as ActivityData, Employee } from "@/lib/data";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid } from 'recharts';
-import { AlertTriangle, Download, TrendingUp, Clock, Users, Activity, Zap, IndianRupee, Layers } from 'lucide-react';
+import { AlertTriangle, Download, TrendingUp, Clock, Users, Activity as ActivityIcon, Zap, IndianRupee, Layers } from 'lucide-react';
 import ChatWidget from "./ChatWidget";
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
@@ -172,7 +172,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           <div>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                <Activity className="text-white" size={20} />
+                <ActivityIcon className="text-white" size={20} />
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Automation Insights</h1>
             </div>
@@ -299,7 +299,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="p-7 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><Activity size={18} /></div>
+              <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><ActivityIcon size={18} /></div>
               <h3 className="font-bold text-slate-800 text-lg">Automation Priority Ranking</h3>
             </div>
             <span className="text-[11px] font-bold tracking-wider text-slate-400 uppercase bg-slate-100 px-3 py-1.5 rounded-full">Score = (Vol * Rep% * Conc) + Cost/1k</span>
