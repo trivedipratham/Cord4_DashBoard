@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^4.0.19",
+    "@ai-sdk/google": "^4.0.23",
     "@ai-sdk/react": "^4.0.39",
     "ai": "^7.0.36",
     "date-fns": "^4.4.0",

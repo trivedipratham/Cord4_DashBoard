@@ -1,4 +1,4 @@
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 
 export async function POST(req: Request) {
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
   ];
 
   const result = await streamText({
-    model: openai('gpt-3.5-turbo'), // You can change to gpt-4 or gemini via their respective providers
+    model: google('gemini-1.5-pro-latest'), // Using Gemini instead of OpenAI
     messages: fullMessages,
   });
 
