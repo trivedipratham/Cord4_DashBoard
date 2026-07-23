@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import { streamText, Message } from 'ai';
+import { streamText } from 'ai';
 
 export async function POST(req: Request) {
   const { messages, dataContext } = await req.json();
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   `;
 
   // Note: we inject the system message at the start.
-  const fullMessages: Message[] = [
+  const fullMessages: any[] = [
     { role: 'system', content: systemMessage, id: 'system' },
     ...messages,
   ];
