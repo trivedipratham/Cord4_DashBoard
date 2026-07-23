@@ -29,7 +29,7 @@ The anomaly engine flags any employee with > 10 hours of total logged time where
 *Justification:* High variance in manual tasks suggests a workflow that lacks standardization, or someone doing highly specialized, ad-hoc work that might need better tooling. 
 
 ### 5. AI Assistant Grounding
-The AI chat widget strictly utilizes the `gpt-3.5-turbo` (or similar) model. To prevent hallucinations, the model's system prompt is injected at runtime with the exact aggregate figures, scores, and top priority tasks calculated from the normalized in-memory dataset. It cannot make up data because it only "knows" what the dashboard explicitly feeds it.
+The AI chat widget strictly utilizes the Google `gemini-3.5-flash` model. To prevent hallucinations, the model's system prompt is injected at runtime with the exact aggregate figures, scores, and top priority tasks calculated from the normalized in-memory dataset. It cannot make up data because it only "knows" what the dashboard explicitly feeds it.
 
 ## Trade-offs & Future Improvements
 - **In-Memory Limits:** Parsing a CSV in-memory via Next.js is fine for this dataset size but would not scale to millions of rows. For a production app, a dedicated ETL pipeline into PostgreSQL would be required.
