@@ -239,7 +239,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                   <Pie data={appBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                     {appBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                   </Pie>
-                  <Tooltip formatter={(value: number) => `${(value/60).toFixed(1)} hrs`} />
+                  <Tooltip formatter={(value: any) => `${(value/60).toFixed(1)} hrs`} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -254,7 +254,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
                   <XAxis dataKey="week" axisLine={false} tickLine={false} />
                   <YAxis unit="%" axisLine={false} tickLine={false} />
-                  <Tooltip formatter={(value: number) => `${value.toFixed(1)}%`} />
+                  <Tooltip formatter={(value: any) => `${value.toFixed(1)}%`} />
                   <Line type="monotone" dataKey="repetitiveShare" stroke="#00C49F" strokeWidth={3} />
                 </LineChart>
               </ResponsiveContainer>
