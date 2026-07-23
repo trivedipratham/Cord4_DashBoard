@@ -98,7 +98,7 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
             />
             <button 
               type="submit" 
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading || !input?.trim()}
               className="bg-indigo-600 text-white h-10 w-10 rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-indigo-700 transition-colors"
             >
               <Send size={16} className="ml-1" />
