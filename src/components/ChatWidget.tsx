@@ -6,10 +6,10 @@ import { useState, useRef, useEffect } from "react";
 
 export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
   const [isOpen, setIsOpen] = useState(false);
+  const [localInput, setLocalInput] = useState("");
   
   // We pass initial system context in body so the API can construct the system message
   const chatState = useChat({
-    api: '/api/chat',
     body: {
       dataContext: {
         summary: dataSummary,
@@ -18,7 +18,8 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
       }
     }
   } as any) as any;
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = chatState;
+  
+  const { messages, append, isLoading } = chatState;
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -27,6 +28,14 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  const onLocalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!localInput.trim() || isLoading) return;
+    
+    append({ role: 'user', content: localInput });
+    setLocalInput("");
+  };
 
   return (
     <>
@@ -54,14 +63,14 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
 
         {/* Messages */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
-          {messages.length === 0 && (
+          {(!messages || messages.length === 0) && (
             <div className="text-center text-slate-500 text-sm mt-10">
               <p>Hi! I'm grounded in your HR & Activity data.</p>
               <p className="mt-2">Ask me things like:</p>
               <p className="italic text-indigo-600 mt-1">"What is our top automation priority?"</p>
             </div>
           )}
-          {messages.map((m: any) => (
+          {messages && messages.map((m: any) => (
             <div key={m.id} className={`flex gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === 'user' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-700'}`}>
                 {m.role === 'user' ? <User size={16} /> : <Bot size={16} />}
@@ -89,16 +98,16 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
 
         {/* Input */}
         <div className="p-3 bg-white border-t border-slate-100 rounded-b-2xl">
-          <form onSubmit={handleSubmit} className="flex gap-2">
+          <form onSubmit={onLocalSubmit} className="flex gap-2">
             <input
-              value={input}
-              onChange={handleInputChange}
+              value={localInput}
+              onChange={(e) => setLocalInput(e.target.value)}
               placeholder="Ask about the data..."
               className="flex-1 bg-slate-100 text-sm border-none rounded-full px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <button 
               type="submit" 
-              disabled={isLoading || !input?.trim()}
+              disabled={isLoading || !localInput.trim()}
               className="bg-indigo-600 text-white h-10 w-10 rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-indigo-700 transition-colors"
             >
               <Send size={16} className="ml-1" />
