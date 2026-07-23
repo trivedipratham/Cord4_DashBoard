@@ -1,26 +1,13 @@
 "use client";
 
-import { useChat } from "@ai-sdk/react";
 import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [localInput, setLocalInput] = useState("");
-  
-  // We pass initial system context in body so the API can construct the system message
-  const chatState = useChat({
-    body: {
-      dataContext: {
-        summary: dataSummary,
-        topTasks: topTasks,
-        headline: headline
-      }
-    }
-  } as any) as any;
-  
-  const { messages, sendMessage, status } = chatState;
-  const isLoading = status === 'submitted' || status === 'streaming';
+  const [messages, setMessages] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -30,14 +17,43 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
     }
   }, [messages]);
 
-  const onLocalSubmit = (e: React.FormEvent) => {
+  const onLocalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!localInput.trim() || isLoading) return;
     
-    if (sendMessage) {
-        sendMessage({ role: 'user', content: localInput });
-    }
+    const userMsg = { role: 'user', content: localInput, id: Date.now().toString() };
+    const newMessages = [...messages, userMsg];
+    
+    setMessages(newMessages);
     setLocalInput("");
+    setIsLoading(true);
+    
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: newMessages,
+          dataContext: {
+            summary: dataSummary,
+            topTasks: topTasks,
+            headline: headline
+          }
+        })
+      });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      setMessages([...newMessages, { role: 'assistant', content: data.text, id: (Date.now() + 1).toString() }]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setMessages([...newMessages, { role: 'assistant', content: "Sorry, I encountered an error. Please ensure your API key is correct and try again.", id: (Date.now() + 1).toString() }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { generateText } from 'ai';
 
 export async function POST(req: Request) {
   const { messages, dataContext } = await req.json();
@@ -28,16 +28,16 @@ export async function POST(req: Request) {
     - Keep responses short, ideally 1-3 sentences unless explaining a complex breakdown.
   `;
 
-  // Note: we inject the system message at the start.
-  const fullMessages: any[] = [
-    { role: 'system', content: systemMessage, id: 'system' },
-    ...messages,
-  ];
-
-  const result = await streamText({
-    model: google('gemini-1.5-pro-latest'), // Using Gemini instead of OpenAI
-    messages: fullMessages,
-  });
-
-  return result.toTextStreamResponse();
+  try {
+    const result = await generateText({
+      model: google('gemini-1.5-pro-latest'), // Using Gemini instead of OpenAI
+      system: systemMessage,
+      messages: messages.map((m: any) => ({ role: m.role, content: m.content })),
+    });
+    
+    return Response.json({ text: result.text });
+  } catch (error: any) {
+    console.error("API Error:", error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
 }
