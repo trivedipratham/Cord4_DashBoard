@@ -136,7 +136,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
       if (a.isRepetitive) empStats[a.employeeId].repetitive += a.durationMinutes;
     });
 
-    let outlier = null;
+    let outlier: any = null;
     let maxNonRepetitiveHrs = 0;
     
     Object.entries(empStats).forEach(([id, stats]) => {
