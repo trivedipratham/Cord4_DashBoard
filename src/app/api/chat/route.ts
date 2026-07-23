@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
   try {
     const result = await generateText({
-      model: google('gemini-1.5-pro-latest'), // Using Gemini instead of OpenAI
+      model: google('gemini-3.5-flash'), // Using Gemini instead of OpenAI
       system: systemMessage,
       messages: messages.map((m: any) => ({ role: m.role, content: m.content })),
     });
