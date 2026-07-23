@@ -9,6 +9,7 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
   
   // We pass initial system context in body so the API can construct the system message
   const chatState = useChat({
+    api: '/api/chat',
     body: {
       dataContext: {
         summary: dataSummary,
@@ -16,7 +17,7 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
         headline: headline
       }
     }
-  }) as any;
+  } as any) as any;
   const { messages, input, handleInputChange, handleSubmit, isLoading } = chatState;
   
   const scrollRef = useRef<HTMLDivElement>(null);
