@@ -1,0 +1,187 @@
+{
+  "generated_at": "2025-11-04T08:30:00+05:30",
+  "source_system": "HRMS_export_v2",
+  "currency_default": "INR",
+  "notes": "Records may have inconsistent shapes; HRMS schema migrated mid-year.",
+  "employees": [
+    {
+      "EmployeeID": "E001",
+      "Name": "Employee 001",
+      "Dept": "Operations",
+      "Role": "Operations Manager",
+      "salary_LPA": 20.9,
+      "tenureMonths": 35,
+      "workingHours": null,
+      "Status": "active"
+    },
+    {
+      "EmployeeID": "E002",
+      "Name": "Employee 002",
+      "Dept": "Operations",
+      "Role": "Operations Analyst",
+      "salary_LPA": 6.5,
+      "tenureMonths": 43,
+      "workingHours": null,
+      "Status": "active"
+    },
+    {
+      "EmployeeID": "E003",
+      "Name": "Employee 003",
+      "Dept": "Operations",
+      "Role": "Operations Analyst",
+      "salary_LPA": 6.3,
+      "tenureMonths": 22,
+      "workingHours": "9-18",
+      "Status": "active"
+    },
+    {
+      "employee_id": "E004",
+      "name": "Employee 004",
+      "department": "Finance",
+      "role": "Finance Manager",
+      "annual_ctc_inr": 2880000,
+      "tenure_months": 41,
+      "working_hours": {
+        "start": "09:00",
+        "end": "18:00",
+        "timezone": "Asia/Kolkata"
+      },
+      "status": "active"
+    },
+    {
+      "employee_id": "E005",
+      "name": "Employee 005",
+      "department": "Finance",
+      "role": "Senior Accountant",
+      "hourly_rate_inr": 695.0,
+      "tenure_months": 42,
+      "working_hours": "9-18",
+      "status": "active"
+    },
+    {
+      "employee_id": "E006",
+      "name": "Employee 006",
+      "department": "Sales",
+      "role": "Sales Development Rep",
+      "hourly_rate_inr": 305.0,
+      "tenure_months": 59,
+      "working_hours": "9-18",
+      "status": "active"
+    },
+    {
+      "EmployeeID": "E007",
+      "Name": "Employee 007",
+      "Dept": "Sales",
+      "Role": "Account Executive",
+      "salary_LPA": 14.0,
+      "tenureMonths": 40,
+      "workingHours": "10-19",
+      "Status": "active"
+    },
+    {
+      "EmployeeID": "E008",
+      "Name": "Employee 008",
+      "Dept": "Sales",
+      "Role": "Sales Manager",
+      "salary_LPA": 29.5,
+      "tenureMonths": 3,
+      "workingHours": null,
+      "Status": "active"
+    },
+    {
+      "employee_id": "E009",
+      "name": "Employee 009",
+      "department": "Customer Support",
+      "meta": {
+        "role": "Support Specialist",
+        "compensation": {
+          "currency": "INR",
+          "annual": 590000
+        },
+        "tenure_months": 29,
+        "working_hours": null
+      },
+      "status": "active"
+    },
+    {
+      "employee_id": "E010",
+      "name": "Employee 010",
+      "department": "Customer Support",
+      "meta": {
+        "role": "Support Specialist",
+        "compensation": {
+          "currency": "INR",
+          "annual": 670000
+        },
+        "tenure_months": 23,
+        "working_hours": "9:30-18:30"
+      },
+      "status": "terminated",
+      "terminated_on": "2025-10-22"
+    },
+    {
+      "employee_id": "E011",
+      "name": "Employee 011",
+      "department": "Customer Support",
+      "role": "Support Specialist",
+      "annual_ctc_inr": 470000,
+      "tenure_months": 28,
+      "working_hours": "9:30-18:30",
+      "status": "active"
+    },
+    {
+      "employee_id": "E012",
+      "name": "Employee 012",
+      "department": "HR",
+      "role": "HRBP",
+      "annual_ctc_inr": 1240000,
+      "tenure_months": 57,
+      "working_hours": null,
+      "status": "active"
+    },
+    {
+      "employee_id": "E014",
+      "name": "Employee 014",
+      "department": "Marketing",
+      "role": "Marketing Associate",
+      "hourly_rate_inr": 330.0,
+      "tenure_months": 6,
+      "working_hours": {
+        "start": "09:00",
+        "end": "18:00",
+        "timezone": "Asia/Kolkata"
+      },
+      "status": "active"
+    },
+    {
+      "EmployeeID": "E015",
+      "Name": "Employee 015",
+      "Dept": "Marketing",
+      "Role": "Content Lead",
+      "salary_LPA": 13.5,
+      "tenureMonths": 7,
+      "workingHours": null,
+      "Status": "active"
+    },
+    {
+      "employee_id": "E007",
+      "name": "Employee 007",
+      "department": "Sales",
+      "role": "Senior Account Executive",
+      "annual_ctc_inr": 2400000,
+      "tenure_months": 28,
+      "working_hours": "9-18",
+      "status": "active"
+    },
+    {
+      "employee_id": "E099",
+      "name": "Employee 099",
+      "department": "Operations",
+      "role": "Operations Analyst",
+      "annual_ctc_inr": 700000,
+      "tenure_months": 8,
+      "working_hours": "9-18",
+      "status": "active"
+    }
+  ]
+}

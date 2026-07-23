@@ -1,0 +1,540 @@
+employee_id,department,timestamp,app_used,task_category,duration_minutes,is_repetitive
+E002,Operations,21/10/2025 14:44,outlook,Cal Mgmt,24,no
+E014,Marketing,15/10/2025 11:05,gmail,internal comms,29,yes
+E003,Operations,2025-10-08 13:46:09,slack,Status Updates,40,TRUE
+E013,HR,2025-10-17T13:21:23,Gmail,Internal Communication,1,no
+E002,Operations,20/10/2025 13:42,MS Outlook,Email Triage,45,yes
+E003,Operations,2025-10-09 14:18:29,EXCEL,REPORTING,5,no
+E011,Customer Support,2025-10-06 15:27:57,SLACK,status updates,25,0
+E014,Marketing,2025-10-15 15:44:22,EXCEL,REPORTING,24,no
+E006,Sales,20/10/2025 13:52,Zoho CRM,Lead-Entry,6,yes
+E011,Customer Support,2025-10-08T16:39:26,chrome,Vendor Portals,1,0
+E015,Marketing,2025-10-15T09:14:51,Gmail,client communication,28,TRUE
+E001,Operations,2025-10-16 15:17,MS Excel,data-entry,25,TRUE
+E003,Operations,2025-10-16T17:01:45,Microsoft Excel,REPORTING,38,No
+E002,Operations,2025-10-15 10:29,sap,Vendor Mgmt,20,true
+E001,Operations,2025-10-22 09:45:28,sap,vendor management,12,false
+E005,Finance,2025-10-13 11:36:53,SAP,vendor management,6,Yes
+E012,HR,2025-10-23 12:50:32,gmail,email triage,32,Yes
+E013,HR,09/10/2025 14:41,Outlook,EMAIL TRIAGE,30,0
+E010,Customer Support,2025-10-17 11:46:33,SLACK,Internal Comms,20,0
+E006,Sales,2025-10-14 11:43,PowerPoint,REPORTING,24,TRUE
+E007,Sales,17/10/2025 13:31,zoom,meetings,40,FALSE
+E002,Operations,2025-10-20 12:29,gmail,EMAIL TRIAGE,-3,1
+E007,Sales,22/10/2025 12:40,SLACK,status updates,14,TRUE
+E003,Operations,2025-10-14 12:24:04,sap,Invoice Proc,15,yes
+E007,Sales,2025-10-13 10:57:32,gmail,email triage,43,No
+E012,HR,2025-10-15T13:36:40,outlook,EMAIL TRIAGE,38,no
+E002,Operations,2025-10-10 12:36:23,chrome,Research,32,No
+E008,Sales,14/10/2025 11:17,SFDC,Pipeline Review,20,yes
+E001,Operations,2025-10-21 14:02:57,EXCEL,data entry,6,TRUE
+E013,HR,2025-10-08 14:27:19,MS Outlook,EMAIL TRIAGE,22,FALSE
+E005,Finance,2025-10-10T12:51:47,MS Outlook,Email Triage,39,TRUE
+E011,Customer Support,2025-10-23 12:43:59,Zoho CRM,CRM Updates,35,TRUE
+E006,Sales,2025-10-21 19:58:32,GMAIL,internal comms,9,false
+E004,Finance,2025-10-23 10:22:43,MS Word,reporting,10,1
+E010,Customer Support,14/10/2025 16:23,Salesforce,Lead-Entry,13,yes
+E007,Sales,23/10/2025 15:25,Gmail,EMAIL TRIAGE,14,TRUE
+E005,Finance,2025-10-24 18:35:32,SAP,Vendor Mgmt,14,Yes
+E010,Customer Support,2025-10-08T10:06:57,Gmail,internal comms,6,no
+E012,HR,2025-10-23 20:19:00,Microsoft Excel,Reporting,38,true
+E011,Customer Support,2025-10-06 18:55:10,gmail,internal comms,31,FALSE
+E007,Sales,2025-10-20 15:39:04,Gmail,Client Comms,17,FALSE
+E014,Marketing,2025-10-15 15:22:27,MS PowerPoint,Deck Building,14,true
+E011,Customer Support,2025-10-15 11:54:20,Sales Force,CRM Update,15,1
+E005,Finance,2025-10-22T09:52:16,sap,Invoice Proc,1,TRUE
+E010,Customer Support,2025-10-22 16:10:04,gmail,client communication,12,0
+E006,Sales,2025-10-07 11:51,SLACK,status updates,15,no
+E012,HR,23/10/2025 14:39,Word,Drafting,1,FALSE
+E006,Sales,2025-10-07 09:03:35,SFDC,CRM Update,36,true
+E006,Sales,2025-10-20 14:00,Gmail,Email Triage,22,true
+E002,Operations,2025-10-21 14:11:24,MS Outlook,calendar management,42,0
+E001,Operations,2025-10-24 16:04,Microsoft Excel,Reconciliation,26,1
+E002,Operations,14/10/2025 10:05,MS Excel,reporting,13,Yes
+E013,HR,2025-10-09 10:26:33,Notion,Notes,62,yes
+E009,Customer Support,2025-10-10 18:14:22,JIRA,ticket updates,28,TRUE
+E004,Finance,23/10/2025 16:01,NA,Vendor Portals,27,false
+E015,Marketing,2025-10-09 11:16:23,ppt,REPORTING,27,no
+E010,Customer Support,14/10/2025 12:07,salesforce,Lead-Entry,39,Yes
+E011,Customer Support,2025-10-07T09:48:15,GMAIL,Internal Communication,45,false
+?,HR,13/10/2025 13:05,MS Outlook,Email Triage,33,false
+E013,HR,2025-10-09T17:40:20,gmail,internal comms,37,FALSE
+E003,Operations,2025-10-08 11:34:31,outlook,Calendar Mgmt,4,Yes
+E006,Sales,2025-10-21 15:30:13,SLACK,Internal Communication,11,no
+E006,Sales,2025-10-24 08:08:30,excel,Recon,,yes
+E006,Sales,2025-10-15 16:37:06,gmail,Email Triage,17,true
+E003,Operations,2025-10-13 13:17:21,slack,Internal Comms,46,Yes
+E005,Finance,2025-10-22 11:40:08,Outlook,EMAIL TRIAGE,2,true
+E015,Marketing,2025-10-15 09:29:00,notion,Notes,2,0
+E001,Operations,16/10/2025 18:23,MS Excel,Recon,42,TRUE
+E001,Operations,2025-10-20 15:21:56, Gmail ,email triage,14,yes
+E006,Sales,23/10/2025 09:25,WhatsApp,Client Comms,11,TRUE
+E002,Operations,2025-10-23 11:26:26,slack,internal comms,31,1
+E013,HR,2025-10-08 16:07:42,Notion,Documentation,12,FALSE
+E008,Sales,2025-10-13 14:34:47,SLACK,Status Updates,10,false
+E010,Customer Support,2025-10-15 15:44,Gmail,Internal Comms,1,yes
+E007,Sales,2025-10-23T11:29:41,Slack,Internal Communication,19,no
+E010,Customer Support,2025-10-08 11:42:05,Chrome,Research,5,false
+E007,Sales,15/10/2025 15:56, Gmail ,internal comms,27,0
+E011,Customer Support,2025-10-13 18:30:09,jira,status updates,14,yes
+E008,Sales,2025-10-23 12:08:21,Zoom,meetings,26,No
+E007,Sales,2025-10-06 15:23:28,Powerpoint,Deck Building,1,false
+E011,Customer Support,2025-10-15 16:10:23,gmail,client communication,,FALSE
+E009,Customer Support,2025-10-08T14:52:40,GMAIL,Client Communication,1,false
+E015,Marketing,2025-10-08 15:58:17,ppt,Deck Building,32,TRUE
+E008,Sales,2025-10-22 08:07:22,ZOOM,Client Call,7,false
+E015,Marketing,2025-10-13 19:52:22,excel,reconciliation,18,TRUE
+E007,Sales,2025-10-23 17:27:26,Salesforce,CRM Updates,44,No
+E009,Customer Support,15/10/2025 08:04,zoho,Lead Entry,9,FALSE
+E010,Customer Support,24/10/2025 13:14,gmail,Internal Comms,3,0
+E009,Customer Support,21/10/2025 17:49,Sales Force,CRM Update,12,yes
+E015,Marketing,08/10/2025 13:51,MS PowerPoint,Deck Building,26,yes
+E006,Sales,2025-10-07 10:12:20,Zoho,Lead-Entry,34,Yes
+E008,Sales,2025-10-06 09:11,Gmail,Internal Comms,30,true
+E009,Customer Support,2025-10-20T16:55:28,gmail,Internal Comms,46,1
+E006,Sales,2025-10-13T14:12:15,GMAIL,Internal Comms,23,0
+E014,Marketing,22/10/2025 13:46,PowerPoint,REPORTING,35,1
+E002,Operations,2025-10-14T11:23:25,MS Excel,REPORTING,24,Yes
+E008,Sales,2025-10-20T10:36:23,GMAIL,internal comms,2,false
+E003,Operations,24/10/2025 10:29,EXCEL,reporting,2,TRUE
+E011,Customer Support,2025-10-21 14:44:53,zoho,Lead Entry,15,1
+E006,Sales,2025-10-23 14:20,slack,status updates,9,no
+E009,Customer Support,2025-10-17 15:55,zoho,Lead-Entry,17,1
+E007,Sales,2025-10-23 10:41:08,Zoho CRM,CRM Update,8,true
+E007,Sales,2025-10-24 16:34:44,salesforce,CRM Updates,27,TRUE
+E006,Sales,2025-10-13 19:59:10,zoom,Internal Meeting,6,no
+E010,Customer Support,2025-10-21 11:25:22, Gmail ,email triage,6,No
+E013,HR,2025-10-14T15:10:59,gmail,EMAIL TRIAGE,2,false
+E012,HR,2025-10-24 11:06:52,chrome,Vendor Portals,1,1
+E010,Customer Support,2025-10-07 12:16:21,zoho,Lead-Entry,10,1
+E008,Sales,2025-10-23 10:18:39,Gmail,Client Comms,12,No
+E004,Finance,2025-10-08 15:34:57,Tally ERP,bookkeeping,7,TRUE
+E009,Customer Support,2025-10-13T11:01:25,slack,Internal Communication,28,false
+E006,Sales,2025-10-08 09:55:24,gmail,email triage,1,No
+E003,Operations,17/10/2025 16:41,excel,Reporting,31,true
+E002,Operations,2025-10-24 09:27:53,MS Outlook,Calendar Mgmt,5,1
+E002,Operations,2025-10-09 16:22:54,SLACK,internal comms,36,TRUE
+E002,Operations,2025-10-08T16:21:26,SLACK,status updates,8,1
+E004,Finance,2025-10-13 13:55:58,GMAIL,internal comms,14,FALSE
+E015,Marketing,2025-10-24 16:45:48,SLACK,Status Updates,21,no
+E002,Operations,2025-10-10 10:27:00,MS Outlook,calendar management,17,true
+E011,Customer Support,2025-10-09 10:43:43,SLACK,status updates,11,No
+E012,HR,2025-10-06 14:47:20,Chrome,Vendor Portals,27,No
+E005,Finance,2025-10-09 15:23:05,MS Excel,Data Entry,29,false
+E008,Sales,2025-10-21 16:38:09,SLACK,Status Updates,18,No
+E003,Operations,2025-10-16 20:27:12,Microsoft Word,Document Drafting,46,Yes
+E011,Customer Support,2025-10-15 09:57:41,zoho,CRM Updates,9,FALSE
+E005,Finance,17/10/2025 12:06,EXCEL,REPORTING,47,0
+E013,HR,2025-10-06 12:05,Notion,documentation,15,1
+E014,Marketing,2025-10-07 12:43:13,Google Chrome,vendor portals,26,false
+E002,Operations,2025-10-08 16:23,MS Excel,Data Entry,35,0
+E004,Finance,2025-10-06 11:48:59,Tally,Bookkeeping,40,yes
+E001,Operations,2025-10-17 13:10:04,sap,invoice processing,29,true
+E005,Finance,2025-10-16 07:05:18,EXCEL,data-entry,5,true
+E005,Finance,2025-10-14 16:23:16,Tally,GST Prep,25,yes
+E012,HR,2025-10-14T14:38:25,chrome,Research,28,1
+E006,Sales,24/10/2025 11:15,Gmail,client communication,9,Yes
+E011,Customer Support,2025-10-16 18:30:37,GMAIL,client communication,10,false
+E012,HR,2025-10-22 12:19:50,MS Excel,DATA ENTRY,27,yes
+E008,Sales,09/10/2025 17:42,zoom,meetings,9,FALSE
+E011,Customer Support,2025-10-15 09:13:30,Slack,Internal Communication,1,No
+E009,Customer Support,2025-10-08 11:18:44, Gmail ,Email Triage,1,true
+E014,Marketing,2025-10-16 11:32:25,ppt,Slide Building,35,No
+E004,Finance,2025-10-22T15:17:18,Tally ERP,GST Prep,7,Yes
+E001,Operations,2025-10-21 10:50:38,EXCEL,Recon,13,false
+E003,Operations,2025-10-20 17:26:38,MS Outlook,Email Triage,37,1
+E011,Customer Support,13/10/2025 14:10,Sales Force,Pipeline Review,1,false
+E002,Operations,2025-10-16 13:07,MS Excel,data-entry,31,yes
+E015,Marketing,2025-10-23 11:44:14,Chrome,Vendor Portals,37,yes
+E002,Operations,2025-10-21 17:26:16,gmail,Client Communication,9,FALSE
+E010,Customer Support,2025-10-21 16:26:23,Slack,Internal Communication,21,no
+E003,Operations,2025-10-21 15:30,Excel,Reconciliation,21,yes
+E012,HR,2025-10-20 10:14:39,GMAIL,Internal Communication,11,FALSE
+E001,Operations,08/10/2025 12:42,gmail,client communication,42,FALSE
+E012,HR,2025-10-20 13:36:42, Gmail ,Internal Comms,39,Yes
+E006,Sales,2025-10-15 12:33:04,SFDC,Lead-Entry,19,No
+E002,Operations,2025-10-09T16:46:55,Outlook,email triage,5,no
+E011,Customer Support,2025-10-21 15:48:13,zoho,Lead-Entry,29,Yes
+E005,Finance,2025-10-10T14:05:32,excel,Recon,4,Yes
+E012,HR,2025-10-20 14:42,chrome,research,27,TRUE
+E003,Operations,10/10/2025 20:51,MS Word,NA,32,1
+E002,Operations,2025-10-10T12:02:46,GMAIL,Client Comms,12,no
+E013,HR,2025-10-13 14:08,Word,doc drafting,5,false
+E015,Marketing,2025-10-17 17:19:08,PowerPoint,deck building,21,No
+E005,Finance,2025-10-16 15:58:17,tally,GST Filing Prep,50,1
+E013,HR,2025-10-13 09:55:14,Google Chrome,Vendor Portals,20,TRUE
+E014,Marketing,2025-10-14 14:42:59, Gmail ,EMAIL TRIAGE,19,yes
+E009,Customer Support,2025-10-22 11:45:47,SLACK,status updates,3,no
+E012,HR,2025-10-10 13:39:18,MS Excel,Reconciliation,5,TRUE
+E002,Operations,2025-10-09 13:10:23,Microsoft Excel,Recon,26,1
+E007,Sales,2025-10-06 14:33:20,SFDC,Pipeline Review,20,0
+E006,Sales,2025-10-13 11:43:38,SLACK,Status Updates,23,FALSE
+E004,Finance,2025-10-17 13:07:23,MS Outlook,EMAIL TRIAGE,46,TRUE
+E015,Marketing,2025-10-24 14:36:46,Microsoft Excel,REPORTING,1,No
+E011,Customer Support,2025-10-17 15:36:52,Slack,status updates,19,true
+E010,Customer Support,2025-10-06 19:24:05,GMAIL,EMAIL TRIAGE,7,No
+E012,HR,07/10/2025 16:17,Notion,notes,9,FALSE
+E004,Finance,2025-10-10 12:29:13,GMAIL,Internal Comms,6,false
+E004,Finance,2025-10-15 12:08,SAP,Vendor Mgmt,43,no
+E002,Operations,2025-10-24 13:32:09,gmail,email triage,25,yes
+E012,HR,10/10/2025 15:11,Microsoft Excel,Recon,16,true
+E009,Customer Support,2025-10-22 17:55:42,gmail,Client Communication,14,false
+E011,Customer Support,2025-10-21 14:05:04,GMAIL,Email Triage,30,0
+E003,Operations,2025-10-14 10:20:53,slack,Internal Comms,28,FALSE
+E005,Finance,2025-10-14 16:10:08, Gmail ,Client Communication,41,No
+E002,Operations,2025-10-24 14:32:06,slack,Status Updates,1,1
+E004,Finance,2025-10-13 15:49:03,Outlook,Cal Mgmt,1,1
+E008,Sales,2025-10-24 11:03:06,Salesforce,pipeline review,28,No
+E003,Operations,22/10/2025 12:40,Google Chrome,research,6,0
+E010,Customer Support,24/10/2025 19:00,Slack,status updates,10,FALSE
+E014,Marketing,2025-10-16 15:06:55,gmail,Client Communication,27,1
+E005,Finance,2025-10-09 19:50:30,,client communication,1,Yes
+E003,Operations,2025-10-10 14:23,Chrome,Vendor Portals,29,Yes
+E004,Finance,2025-10-22T11:20:10,SAP,Invoice Proc,1,Yes
+E011,Customer Support,2025-10-22 16:48, Gmail ,Internal Comms,22,true
+E015,Marketing,2025-10-15 09:42:57,gmail,Email Triage,41,yes
+E006,Sales,10/10/2025 19:08,Microsoft Excel,REPORTING,29,No
+E011,Customer Support,16/10/2025 08:39,Slack,status updates,22,yes
+E012,HR,16/10/2025 12:41,EXCEL,data-entry,1,true
+E013,HR,2025-10-08 14:52:55,Word,doc drafting,11,false
+E006,Sales,2025-10-14 15:28:20,Zoho,lead entry,23,TRUE
+E001,Operations,2025-10-14 15:34:18,Excel,Recon,18,yes
+E002,Operations,2025-10-22T15:38:41,MS Excel,DATA ENTRY,13,yes
+E002,Operations,2025-10-06 15:35:10,Microsoft Excel,REPORTING,36,Yes
+E011,Customer Support,2025-10-24 12:58,Jira,Status Updates,1,Yes
+E013,HR,2025-10-16 17:32:20,MS Excel,reporting,22,true
+E011,Customer Support,22/10/2025 07:02,SLACK,internal comms,25,Yes
+E007,Sales,2025-10-20 12:44:56,MS PowerPoint,REPORTING,33,Yes
+E014,Marketing,2025-10-15 09:09:45,GMAIL,Client Communication,34,TRUE
+E008,Sales,2025-10-09 12:04:19, Gmail ,client communication,11,FALSE
+E012,HR,2025-10-22 19:18:17,gmail,EMAIL TRIAGE,16,no
+E003,Operations,2025-10-10 16:01:05,Excel,Recon,16,Yes
+E007,Sales,2025-10-20 13:31:02,zoho,Lead-Entry,37,true
+E001,Operations,2025-10-13 09:38:02,outlook,Cal Mgmt,1,FALSE
+E013,HR,2025-10-22 11:40:29,,email triage,7,0
+E003,Operations,2025-10-14 11:44:04,sap,Invoice Proc,35,yes
+E004,Finance,2025-10-09T10:49:40,MS Excel,data-entry,44,Yes
+E010,Customer Support,24/10/2025 11:11,Zoho,CRM Update,28,1
+E005,Finance,2025-10-10 20:11:34,GMAIL,internal comms,4,FALSE
+E012,HR,2025-10-13T14:40:14,Outlook,Email Triage,999,yes
+E009,Customer Support,2025-10-17T15:09:53,SLACK,Internal Comms,1,FALSE
+E003,Operations,2025-10-20 20:29,SAP,invoice processing,32,TRUE
+E015,Marketing,2025-10-15 19:05:37,PowerPoint,REPORTING,31,false
+E009,Customer Support,2025-10-15 09:57:50,Zoho,crm updates,13,yes
+E002,Operations,2025-10-21 19:03:49,SAP,vendor management,33,yes
+E015,Marketing,2025-10-13 20:34:33,chrome,Vendor Portals,13,No
+E001,Operations,2025-10-17 09:07:53,SLACK,Internal Comms,13,no
+E010,Customer Support,2025-10-14 18:21:53,Zoho CRM,lead entry,27,1
+E002,Operations,2025-10-16 12:46,MS Excel,Reporting,14,yes
+E005,Finance,2025-10-20T11:18:39,Excel,Reconciliation,1,1
+E011,Customer Support,2025-10-09 15:09,Gmail,Internal Communication,28,1
+E003,Operations,2025-10-21T16:34:02,outlook,email triage,39,Yes
+E008,Sales,21/10/2025 11:12,Zoom,Internal Meeting,14,0
+E006,Sales,2025-10-20 14:53:17,Zoom,-,1,false
+E002,Operations,2025-10-21 12:57:36,GMAIL,Internal Communication,22,false
+E009,Customer Support,2025-10-21 19:43,SLACK,Status Updates,18,yes
+E014,Marketing,2025-10-20 15:45:41,ppt,Slide Building,26,Yes
+E001,Operations,2025-10-13 11:32:49,SLACK,internal comms,25,FALSE
+E015,Marketing,2025-10-15T15:00:21,Notion,Docs,8,no
+E009,Customer Support,2025-10-07 15:54:56,SLACK,internal comms,24,no
+E014,Marketing,2025-10-10 20:29:31,MS PowerPoint,reporting,31,TRUE
+E007,Sales,2025-10-23 07:48,Zoho,lead entry,17,no
+E010,Customer Support,2025-10-06 18:43:46,Gmail,Client Comms,6,Yes
+E004,Finance,16/10/2025 15:05,GMAIL,Internal Comms,8,yes
+E010,Customer Support,2025-10-07 13:10,Sales Force,pipeline review,23,0
+E010,Customer Support,2025-10-07T09:27:08,zoho,Lead Entry,20,TRUE
+E007,Sales,2025-10-17 18:58:51,whatsapp web,Client Communication,2,true
+E011,Customer Support,2025-10-23 11:22:39,slack,Status Updates,12,no
+E002,Operations,2025-10-15 15:58:26,SLACK,Internal Comms,13,no
+E009,Customer Support,2025-10-21T10:57:39,JIRA,Status Updates,6,No
+E013,HR,2025-10-09 15:03:43,Chrome,research,18,no
+E011,Customer Support,2025-10-14 16:03:48,Chrome,research,15,false
+E014,Marketing,2025-10-06T14:00:05,excel,Reporting,30,yes
+E013,HR,2025-10-08T17:02:20,Gmail,email triage,17,1
+E010,Customer Support,2025-10-14T16:45:51,GMAIL,Client Comms,27,No
+E013,HR,2025-10-16 14:48:06,Gmail,Internal Comms,4,FALSE
+E015,Marketing,2025-10-15 15:26,MS Word,Document Drafting,37,no
+E007,Sales,2025-10-13 16:50:31,WhatsApp,Client Comms,39,0
+E013,HR,2025-10-07 09:18:15,outlook,calendar management,21,0
+E015,Marketing,2025-10-06 11:21:13,Google Chrome,research,39,Yes
+E005,Finance,2025-10-13 14:27,MS Excel,Reconciliation,10,0
+E014,Marketing,2025-10-23 11:42:30,notion,documentation,29,no
+E004,Finance,17/10/2025 16:38,Microsoft Excel,data entry,26,TRUE
+E005,Finance,2025-10-13 11:30:13,Chrome,research,27,No
+E005,Finance,2025-10-17 18:57,Excel,data entry,18,1
+E002,Operations,2025-10-14T13:26:38,SAP,vendor management,29,yes
+E001,Operations,2025-10-23 15:54:05,Word,Drafting,30,TRUE
+E001,Operations,2025-10-15 14:50,MS Outlook,email triage,22,true
+E007,Sales,2025-10-24 15:03:05,salesforce,CRM Updates,12,No
+E007,Sales,2025-10-16T17:39:14,EXCEL,Reconciliation,39,yes
+E011,Customer Support,2025-10-13 14:15:54,Zoho,lead entry,14,true
+E003,Operations,2025-10-14 12:47:08,SLACK,Status Updates,46,No
+E013,HR,2025-10-14T13:40:20,notion,Docs,13,yes
+E003,Operations,2025-10-16 10:02:05,Slack,Internal Communication,34,No
+E002,Operations,2025-10-15 11:24:49,Outlook,EMAIL TRIAGE,21,true
+E004,Finance,06/10/2025 15:26,sap,Invoice Proc,44,1
+E013,HR,2025-10-20 10:43:04,gmail,Internal Communication,1,No
+E002,Operations,2025-10-10 18:55:39, Gmail ,Client Communication,31,true
+E002,Operations,2025-10-22 14:37:16,Slack,internal comms,41,false
+E014,Marketing,2025-10-23 15:23:28, Gmail ,internal comms,21,TRUE
+E003,Operations,2025-10-21T17:46:42,GMAIL,Email Triage,4,false
+E007,Sales,2025-10-06 13:27:11,zoom,meetings,29,false
+E001,Operations,06/10/2025 09:27,Outlook,Email Triage,24,true
+E011,Customer Support,2025-10-08 12:32,Chrome,research,7,no
+E005,Finance,2025-10-15 11:41:08,SAP,Invoice Processing,36,true
+E004,Finance,2025-10-06 09:07:09,Google Chrome,Research,26,no
+E012,HR,2025-10-24 17:52:33,Notion,Notes,1,FALSE
+E001,Operations,2025-10-20 14:59:32,Slack,Internal Comms,7,No
+E015,Marketing,2025-10-07 12:50:20,MS Word,Drafting,1,Yes
+E013,HR,2025-10-16 15:59,gmail,internal comms,33,0
+E008,Sales,2025-10-17 12:02:35,Zoho CRM,Lead Entry,19,TRUE
+E005,Finance,2025-10-07 18:26:16,Tally,bookkeeping,6,TRUE
+E008,Sales,2025-10-16 18:04:21,salesforce,crm updates,10,true
+E013,HR,14/10/2025 15:47,GMAIL,email triage,18,TRUE
+E008,Sales,2025-10-24 09:29:56,Zoho,CRM Updates,54,Yes
+E006,Sales,2025-10-22 09:53:08,gmail,Client Communication,1,true
+E002,Operations,2025-10-14 13:27:41,GMAIL,Client Comms,15,TRUE
+E015,Marketing,15/10/2025 11:30,slack,Internal Communication,22,true
+E001,Operations,2025-10-08 11:43:53,Microsoft Word,REPORTING,26,FALSE
+E010,Customer Support,2025-10-07 11:37:01,chrome,research,36,no
+E007,Sales,24/10/2025 15:45,slack,Internal Comms,6,FALSE
+E001,Operations,24/10/2025 11:58,Excel,Data Entry,11,yes
+E008,Sales,13/10/2025 11:22,slack,Status Updates,8,FALSE
+E007,Sales,2025-10-08 15:01:03,zoho,CRM Updates,46,true
+E015,Marketing,2025-10-24 12:05:27,Powerpoint,Reporting,23,No
+E005,Finance,2025-10-07 15:53:34,GMAIL,Client Communication,4,FALSE
+E014,Marketing,2025-10-22 12:08:57,notion,documentation,27,0
+E004,Finance,2025-10-08 11:53,tally,gst filing prep,19,TRUE
+E013,HR,2025-10-21 08:07:16,Outlook,calendar management,36,true
+E005,Finance,2025-10-09 19:44:42,outlook,Email Triage,10,Yes
+E003,Operations,2025-10-06T10:02:53,outlook,Cal Mgmt,13,No
+E002,Operations,2025-10-10 13:56:53,Microsoft Word,REPORTING,30,yes
+E010,Customer Support,2025-10-13 09:59,Gmail,client communication,16,no
+E005,Finance,2025-10-21 12:57:49,sap,Vendor Mgmt,1,yes
+E015,Marketing,2025-10-23 17:34:08,chrome,vendor portals,34,1
+E006,Sales,2025-10-23 18:39:55,WhatsApp Web,Client Comms,1,true
+E002,Operations,2025-10-07 12:33:59,gmail,internal comms,1,yes
+E008,Sales,2025-10-08 17:44, Gmail ,Client Communication,7,no
+E014,Marketing,2025-10-23 09:29:22,ppt,Reporting,35,1
+E005,Finance,2025-10-10 17:34:18,MS Outlook,calendar management,1,no
+E013,HR,2025-10-14 14:52:22,chrome,research,25,TRUE
+E007,Sales,2025-10-09 09:45:41,MS PowerPoint,Reporting,37,true
+E008,Sales,2025-10-14 10:25:20,zoho,CRM Update,13,yes
+E009,Customer Support,2025-10-24 17:03:00,SLACK,Internal Comms,5,0
+E012,HR,2025-10-14 11:58:05,Word,REPORTING,44,false
+E002,Operations,2025-10-10 19:31:44,outlook,calendar management,39,No
+E015,Marketing,2025-10-24T16:56:20,Powerpoint,deck building,23,FALSE
+E011,Customer Support,2025-10-16 16:49:43,Gmail,internal comms,14,false
+E012,HR,07/10/2025 16:38,Excel,Recon,12,TRUE
+E001,Operations,2025-10-08 10:34:56,slack,Internal Comms,30,No
+E002,Operations,2025-10-15 16:14:08,Outlook,email triage,65,1
+E001,Operations,2025-10-13 12:32:59,GMAIL,Client Comms,18,TRUE
+E011,Customer Support,2025-10-07 12:03:16,jira,Status Updates,21,TRUE
+E012,HR,2025-10-23 10:50:11,EXCEL,reconciliation,1,-
+E013,HR,2025-10-07 16:42:33,Google Chrome,vendor portals,30,no
+E009,Customer Support,07/10/2025 13:48, Gmail ,EMAIL TRIAGE,34,yes
+E008,Sales,2025-10-07T12:35:33,Microsoft Excel,data-entry,15,Yes
+E001,Operations,2025-10-20 14:34:35,Slack,internal comms,28,true
+E003,Operations,16/10/2025 16:36,Microsoft Word,Reporting,30,true
+E002,Operations,2025-10-09 15:51:08,EXCEL,Data Entry,6,Yes
+E003,Operations,2025-10-23 19:39:17,MS Outlook,EMAIL TRIAGE,46,Yes
+E008,Sales,2025-10-22 11:19:00,Gmail,EMAIL TRIAGE,11,true
+E008,Sales,2025-10-06 11:00:21,Zoho,CRM Update,4,1
+E015,Marketing,2025-10-07 10:13:04,slack,internal comms,1,1
+E005,Finance,2025-10-16 14:54:17,Tally ERP,bookkeeping,15,TRUE
+E013,HR,2025-10-06T10:48:10,EXCEL,Data Entry,28,Yes
+E009,Customer Support,2025-10-06 15:56:36, Gmail ,Internal Communication,14,no
+E008,Sales,2025-10-08T13:44:19,Sales Force,Pipeline Review,10,false
+E001,Operations,2025-10-09T13:29:37,Gmail,client communication,46,No
+E009,Customer Support,2025-10-24 12:39:15,Zoho CRM,Lead Entry,23,yes
+E009,Customer Support,2025-10-09 17:03:18,Zoho CRM,crm updates,1,0
+E012,HR,2025-10-13 13:24,excel,data-entry,35,Yes
+E013,HR,2025-10-22 14:31:49,gmail,Client Comms,999,0
+E001,Operations,2025-10-17T12:07:06,Excel,Data Entry,40,true
+E012,HR,2025-10-07 18:02:48,Word,Reporting,23,true
+E002,Operations,2025-10-15 18:08,EXCEL,reconciliation,4,0
+E010,Customer Support,2025-10-22 13:56:53,Salesforce,crm updates,24,FALSE
+E004,Finance,2025-10-13T15:25:58,Word,Drafting,19,0
+E004,Finance,21/10/2025 12:58,Excel,Reporting,22,1
+E002,Operations,2025-10-24 12:24:27,Microsoft Word,Document Drafting,22,true
+E015,Marketing,06/10/2025 19:54,Excel,reconciliation,22,1
+E005,Finance,2025-10-20 15:12:17,gmail,client communication,26,1
+E008,Sales,2025-10-06 15:44:59,SLACK,Status Updates,25,Yes
+E010,Customer Support,2025-10-15 16:12:46,salesforce,Pipeline Review,7,FALSE
+E015,Marketing,2025-10-10 12:36:04,Chrome,vendor portals,1,TRUE
+E014,Marketing,22/10/2025 11:49,Notion,Docs,32,TRUE
+E012,HR,2025-10-17 13:36, Gmail ,Email Triage,17,Yes
+E011,Customer Support,17/10/2025 10:46,Gmail,internal comms,17,TRUE
+E001,Operations,2025-10-10 14:52:39,SLACK,Internal Comms,11,FALSE
+E005,Finance,15/10/2025 15:54,MS Outlook,email triage,1,true
+E001,Operations,2025-10-08 11:34:08,MS Word,reporting,38,0
+E012,HR,2025-10-24 14:40:13,Notion,Notes,20,0
+E007,Sales,2025-10-17 10:53:01,WhatsApp,Internal Comms,22,FALSE
+E007,Sales,2025-10-09 12:21:49,Slack,Internal Communication,18,No
+E007,Sales,2025-10-17 10:44:43,Gmail,email triage,1,yes
+E010,Customer Support,14/10/2025 14:40,Slack,Status Updates,1,true
+E011,Customer Support,2025-10-13 14:46:14,Chrome,Research,12,1
+E004,Finance,2025-10-16 10:08,excel,reporting,1,TRUE
+E004,Finance,17/10/2025 12:37,outlook,Calendar Mgmt,1,yes
+E009,Customer Support,2025-10-09 10:23:58,zoho,crm updates,20,yes
+E013,HR,2025-10-07 15:51:25,gmail,email triage,8,true
+E003,Operations,2025-10-09 12:43:46,excel,reconciliation,23,Yes
+E008,Sales,2025-10-09 10:38:08,GMAIL,Client Communication,23,no
+E005,Finance,10/10/2025 15:48,sap,Invoice Processing,17,yes
+E014,Marketing,2025-10-09 10:05:48,ppt,deck building,2,no
+E011,Customer Support,2025-10-17T13:54:10,Zoho CRM,Lead-Entry,35,false
+E015,Marketing,2025-10-16 10:02:16, Gmail ,email triage,10,1
+E015,Marketing,2025-10-14 15:36,slack,Internal Communication,18,FALSE
+E004,Finance,13/10/2025 15:31,MS Word,reporting,1,No
+E003,Operations,2025-10-22 12:26:44,slack,internal comms,15,no
+E012,HR,2025-10-22 12:34:30,Notion,Notes,41,1
+E001,Operations,07/10/2025 18:26,Microsoft Word,REPORTING,35,No
+E008,Sales,2025-10-06 07:24:16, Gmail ,client communication,1,no
+E011,Customer Support,2025-10-21 11:24:08,Slack,Internal Communication,17,false
+E003,Operations,2025-10-22 15:21:59,Gmail,Email Triage,30,1
+E008,Sales,10/10/2025 16:40,gmail,Internal Communication,34,yes
+E013,HR,17/10/2025 16:12,MS Excel,DATA ENTRY,40,true
+E009,Customer Support,2025-10-13 16:57:32,Zoho,CRM Update,1,No
+E013,HR,2025-10-14 14:10,MS Excel,Reconciliation,22,false
+E013,HR,2025-10-10 12:41:11, Gmail ,Client Comms,1,yes
+E011,Customer Support,2025-10-06 15:14,GMAIL,Internal Communication,20,true
+E011,Customer Support,2025-10-14 10:52:45,jira,Ticket Updates,32,1
+E002,Operations,2025-10-15 10:20,Gmail,internal comms,19,no
+E006,Sales,2025-10-22 16:51:18,Zoho CRM,CRM Updates,13,TRUE
+E009,Customer Support,09/10/2025 10:08,Slack,status updates,6,TRUE
+E008,Sales,2025-10-23 09:24,Gmail,Email Triage,28,1
+E003,Operations,13/10/2025 13:58,outlook,calendar management,24,TRUE
+E005,Finance,2025-10-24 12:25:46,Gmail,Client Communication,14,false
+E003,Operations,2025-10-17 11:14:29,MS Word,doc drafting,4,no
+E012,HR,13/10/2025 15:38,Word,REPORTING,21,no
+E011,Customer Support,2025-10-09 07:19:13,Slack,internal comms,25,0
+E012,HR,2025-10-15 14:19:42,Google Chrome,Research,25,FALSE
+E013,HR,2025-10-22 16:08:46,Notion,notes,19,FALSE
+E014,Marketing,20/10/2025 12:52,gmail,Email Triage,27,no
+E014,Marketing,2025-10-23 16:41,Google Chrome,Research,25,0
+E003,Operations,2025-10-10 12:36:02,MS Outlook,Calendar Mgmt,25,no
+E015,Marketing,14/10/2025 11:48,PowerPoint,REPORTING,27,TRUE
+E004,Finance,13/10/2025 11:56,gmail,internal comms,2,0
+E011,Customer Support,2025-10-14 19:43:41,zoho,crm updates,12,yes
+E012,HR,2025-10-21 11:37:06,MS Word,reporting,17,No
+E004,Finance,2025-10-23 13:38:30,sap,Invoice Processing,14,yes
+E007,Sales,07/10/2025 16:05,MS Excel,Reconciliation,4,yes
+E004,Finance,2025-10-21 15:35:58,sap,invoice processing,36,0
+E014,Marketing,20/10/2025 16:18,gmail,client communication,25,0
+E009,Customer Support,2025-10-09 12:49:39,salesforce,pipeline review,54,false
+E010,Customer Support,2025-10-17 15:27,Sales Force,crm updates,19,yes
+E008,Sales,2025-10-06 16:33,EXCEL,reconciliation,24,TRUE
+E014,Marketing,13/10/2025 15:44,Chrome,vendor portals,1,0
+E010,Customer Support,2025-10-06 18:43:46,Gmail,Client Comms,6,Yes
+E001,Operations,16/10/2025 11:51,GMAIL,EMAIL TRIAGE,6,true
+E001,Operations,2025-10-09 15:28:04,Chrome,vendor portals,23,Yes
+E015,Marketing,2025-10-24T11:33:36,GMAIL,Internal Communication,9,Yes
+E014,Marketing,2025-10-16 16:49:13,excel,Recon,23,true
+E003,Operations,2025-10-20 12:28:06,MS Outlook,Cal Mgmt,2,Yes
+E013,HR,2025-10-14 12:11:43,Google Chrome,vendor portals,26,TRUE
+E006,Sales,2025-10-17 16:36:48,Slack,internal comms,17,FALSE
+E014,Marketing,2025-10-09 17:36, Gmail ,Client Comms,10,yes
+E003,Operations,2025-10-13 17:28:51,Excel,reconciliation,1,true
+E012,HR,2025-10-21T16:37:25,Notion,Documentation,15,No
+E013,HR,2025-10-13 11:32:56,outlook,calendar management,1,TRUE
+E006,Sales,2025-10-20T14:18:48,whatsapp web,client communication,21,yes
+E003,Operations,15/10/2025 14:34,SAP,invoice processing,14,1
+E013,HR,2025-10-21 12:55:43,gmail,email triage,4,FALSE
+E015,Marketing,2025-10-08 10:35:00,Powerpoint,Reporting,49,false
+E010,Customer Support,2025-10-07 11:37:01,chrome,research,36,no
+E003,Operations,16/10/2025 09:45,GMAIL,email triage,23,TRUE
+E013,HR,2025-10-08 12:17:11, Gmail ,Client Comms,1,yes
+E004,Finance,07/10/2025 16:06,MS Excel,Reconciliation,17,true
+E006,Sales,2025-10-13 12:53:32,Sales Force,pipeline review,25,no
+E004,Finance,2025-10-06 14:14:04,-,DATA ENTRY,10,TRUE
+E001,Operations,2025-10-22 13:55:34,Microsoft Excel,REPORTING,1,no
+E015,Marketing,2025-10-15 15:05:40,Google Chrome,Vendor Portals,1,0
+E006,Sales,21/10/2025 16:24,WhatsApp Web,Internal Comms,20,Yes
+E010,Customer Support,2025-10-08 16:14,jira,Ticket Updates,40,false
+E009,Customer Support,2025-10-23 10:29:35,Google Chrome,Research,34,FALSE
+E006,Sales,09/10/2025 13:53,SFDC,Lead Entry,19,yes
+E006,Sales,17/10/2025 09:28,Powerpoint,Deck Building,1,yes
+E010,Customer Support,2025-10-21 12:55:22,zoho,crm updates,5,No
+E008,Sales,23/10/2025 10:29,SFDC,lead entry,29,true
+E009,Customer Support,2025-10-22 10:42:15,gmail,Internal Comms,1,Yes
+E008,Sales,2025-10-21 11:22:49,Sales Force,Pipeline Review,7,FALSE
+E008,Sales,13/10/2025 15:45,Zoho,CRM Update,17,1
+E009,Customer Support,2025-10-14 11:24:00,slack,internal comms,33,yes
+E006,Sales,2025-10-17 10:55,gmail,Internal Communication,21,no
+E001,Operations,2025-10-08 12:03:13,Microsoft Excel,REPORTING,23,false
+E007,Sales,2025-10-20 18:39:33,Sales Force,CRM Update,36,TRUE
+E012,HR,2025-10-16 15:08:11,Google Chrome,Vendor Portals,23,Yes
+E003,Operations,2025-10-08 07:51:29,Microsoft Excel,Recon,16,Yes
+E001,Operations,2025-10-16 14:59:46,EXCEL,DATA ENTRY,57,0
+E006,Sales,2025-10-07 12:54:26, Gmail ,Internal Communication,1,yes
+E002,Operations,2025-10-20T17:15:02,sap,vendor management,5,TRUE
+?,Marketing,2025-10-06 17:36:56,Google Chrome,vendor portals,36,true
+E013,HR,2025-10-09T09:06:35,MS Outlook,email triage,36,0
+E004,Finance,2025-10-22 13:03,MS Excel,Data Entry,1,TRUE
+E015,Marketing,09/10/2025 18:26,slack,status updates,47,-
+E009,Customer Support,2025-10-10 11:03:15,jira,status updates,12,TRUE
+E002,Operations,2025-10-16 13:36:43,gmail,Internal Communication,25,yes
+E008,Sales,2025-10-08 16:19:05,salesforce,Pipeline Review,21,No
+E011,Customer Support,2025-10-09 09:06:51,GMAIL,Internal Comms,33,FALSE
+E005,Finance,2025-10-10 07:05:01,MS Word,Reporting,17,false
+E007,Sales,2025-10-23 15:09:10,salesforce,CRM Updates,30,FALSE
+E010,Customer Support,2025-10-22 11:32:31,Zoho CRM,crm updates,34,FALSE
+E009,Customer Support,2025-10-07 15:11:39,GMAIL,client communication,4,No
+E004,Finance,2025-10-15 10:54:31,chrome,Research,6,FALSE
+E013,HR,2025-10-07 14:18,gmail,email triage,23,false
+E003,Operations,2025-10-07 17:36:12,MS Excel,data-entry,40,yes
+E014,Marketing,2025-10-14 15:26:43,Powerpoint,deck building,10,yes
+E007,Sales,2025-10-10 16:22:15,WhatsApp Web,Client Comms,1,TRUE
+E006,Sales,06/10/2025 16:19,Gmail,Email Triage,10,No
+E013,HR,24/10/2025 15:13,gmail,Client Communication,999,1
+E015,Marketing,2025-10-24T13:18:24, Gmail ,Email Triage,1,false
+E012,HR,21/10/2025 14:43,Outlook,Email Triage,34,no
+E009,Customer Support,10/10/2025 10:22,Slack,status updates,30,1
+E001,Operations,2025-10-17T14:26:03,Word,Document Drafting,10,true
+E010,Customer Support,2025-10-06 17:56,chrome,research,29,false
+E007,Sales,2025-10-16 10:12:41,WhatsApp Web,Internal Communication,29,Yes
+E006,Sales,2025-10-08T17:14:47,Slack,status updates,22,TRUE
+E003,Operations,16/10/2025 16:14,MS Excel,reconciliation,21,true
+E009,Customer Support,2025-10-14T10:42:27, Gmail ,Internal Communication,,No
+E012,HR,2025-10-16 11:52:26,Microsoft Word,reporting,18,No
+E003,Operations,06/10/2025 16:55,GMAIL,Email Triage,17,true
+E012,HR,2025-10-09T11:08:42,Google Chrome,Vendor Portals,37,no
+E009,Customer Support,2025-10-15 13:47:35,gmail,Client Communication,17,yes
+E001,Operations,2025-10-21 13:17:13,Slack,Internal Communication,18,false
+E014,Marketing,2025-10-20 15:59:24,Powerpoint,reporting,22,0
+E006,Sales,2025-10-10 12:41:17,Zoho,CRM Updates,21,TRUE
+E012,HR,2025-10-20 11:04:36,Outlook,email triage,47,yes
+E005,Finance,2025-10-16 10:00:03,MS Excel,reconciliation,62,yes
+E012,HR,2025-10-23 17:38:41,outlook,Calendar Mgmt,33,No
+E002,Operations,17/10/2025 14:47,gmail,Client Comms,1,1
+E013,HR,2025-10-06 15:43:41,MS Outlook,Email Triage,33,TRUE
+E008,Sales,2025-10-08T15:54:21,ZOOM,Client Call,1,no
+E011,Customer Support,2025-10-10 09:12:56,Gmail,email triage,43,1
+E006,Sales,16/10/2025 12:40,Zoho CRM,crm updates,7,false
+E006,Sales,17/10/2025 12:28,Gmail,Internal Comms,1,false
+E005,Finance,2025-10-22T16:46:17,SAP,Invoice Proc,57,no
+E003,Operations,2025-10-17 12:02,SAP,vendor management,24,TRUE
+E005,Finance,2025-10-24 16:19:13,Tally ERP,gst filing prep,13,false
+E006,Sales,2025-10-22T14:46:04,GMAIL,Client Communication,31,true
+E004,Finance,2025-10-23T10:28:30,Word,doc drafting,38,true
+E013,HR,2025-10-06 13:46:56,MS Outlook,calendar management,10,Yes
+E011,Customer Support,2025-10-17 14:56:46,Zoho,lead entry,1,1
+E014,Marketing,2025-10-07 13:16,chrome,Research,21,Yes
+E013,HR,2025-10-16 15:36:38,outlook,Calendar Mgmt,17,false
+E014,Marketing,2025-10-08T10:59:45,Microsoft Excel,REPORTING,47,0
+E011,Customer Support,2025-10-23 11:56:41, Gmail ,Internal Communication,25,yes
+E004,Finance,2025-10-15T11:55:02,chrome,research,17,0
+E003,Operations,2025-10-08T13:19:12,MS Excel,reporting,32,FALSE
+E007,Sales,2025-10-08 13:56,Excel,reporting,20,yes
+E012,HR,2025-10-23T16:30:35,excel,reporting,18,yes
+E008,Sales,2025-10-15 13:54:07,Gmail,Client Communication,30,0
+E010,Customer Support,2025-10-10 18:34:32,SLACK,Internal Comms,18,FALSE
+E006,Sales,2025-10-08 11:37:37,WhatsApp Web,internal comms,38,false
+E008,Sales,2025-10-23 16:00:59,GMAIL,email triage,6,true
+E001,Operations,2025-10-09 12:11,excel,Recon,1,yes
+E013,HR,2025-10-20 09:32:10, Gmail ,Internal Comms,30,Yes
+E012,HR,2025-10-23 17:31,GMAIL,email triage,20,false
+E002,Operations,2025-10-07 13:42,MS Word,reporting,4,1
+E014,Marketing,07/10/2025 11:01,Notion,documentation,26,1
+E002,Operations,2025-10-20 10:54:16,Gmail,client communication,4,yes
+E004,Finance,2025-10-21 13:35:04,MS Outlook,email triage,5,1
