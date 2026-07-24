@@ -170,6 +170,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-800">Automation Insights</h1>
             <p className="text-slate-500 text-sm mt-1">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
+            <div className="hidden print:block text-slate-600 text-sm font-medium mt-2">
+              Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
+            </div>
           </div>
           
           <div className="flex gap-4 mt-4 md:mt-0">
@@ -194,7 +197,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Anomaly Callout */}
         {anomaly && (
-          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm">
+          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm print:hidden">
             <h3 className="text-amber-800 font-bold text-sm uppercase">Anomaly Detected</h3>
             <p className="text-amber-700 text-sm mt-1">
               <strong>{anomaly.name} ({anomaly.dept})</strong> has logged {anomaly.nonRepHrs} hours of non-repetitive work, which is highly atypical (&gt;80% manual variance). Consider reviewing their workflow to see if new processes are missing standardized tools.
@@ -237,7 +240,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 print:hidden">
           {/* Chart: Time Sink (Dynamic) */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
             <div className="flex justify-between items-center mb-4">
@@ -303,7 +306,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                 {automationPriority.slice(0, 8).map((task, idx) => (
                   <tr 
                     key={task.category} 
-                    className="hover:bg-indigo-50/50 cursor-pointer transition-colors"
+                    className={`hover:bg-indigo-50/50 cursor-pointer transition-colors ${idx >= 5 ? 'print:hidden' : ''}`}
                     onClick={() => setSelectedTaskCategory(task.category === selectedTaskCategory ? null : task.category)}
                   >
                     <td className="px-6 py-4 font-medium text-slate-700 capitalize flex items-center gap-2">
@@ -331,7 +334,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Employee Drill-Down */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 print:hidden">
           <h3 className="font-bold text-slate-700 mb-4">Employee Drill-down (Cross-filtered)</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Show employees who participate in the filtered dataset */}
