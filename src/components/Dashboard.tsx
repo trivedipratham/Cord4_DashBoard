@@ -178,20 +178,20 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFBFF] relative pb-20 selection:bg-indigo-500 selection:text-white" style={{ backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
+    <div className="min-h-screen bg-slate-50 relative pb-20 selection:bg-indigo-500 selection:text-white">
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           @page { size: landscape; margin: 12mm; }
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}} />
-      <div className="p-4 md:p-8 print:p-0 max-w-7xl mx-auto space-y-8 print:space-y-4" ref={dashboardRef}>
+      <div className="p-4 md:p-8 print:p-0 max-w-7xl mx-auto space-y-6 print:space-y-4" ref={dashboardRef}>
         
         {/* Header & Controls */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white/60 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/80 ring-1 ring-slate-900/5 transition-all">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">Automation Insights</h1>
-            <p className="text-slate-500 text-sm mt-1.5 font-medium">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">Automation Insights</h1>
+            <p className="text-slate-500 text-sm mt-1 font-medium">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
             {(selectedDept || selectedTaskCategory || isExporting) && (
               <div className="text-slate-600 text-sm font-medium mt-2">
                 Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
@@ -216,7 +216,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               <button 
                 onClick={exportPNG}
                 disabled={isExporting}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all hover:shadow-lg hover:shadow-indigo-600/20 active:scale-95 flex items-center gap-2"
+                className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all hover:shadow-md active:scale-95 flex items-center gap-2"
               >
                 {isExporting ? 'Generating...' : 'Export PDF'}
               </button>
@@ -239,8 +239,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Data Ingestion Stats */}
         {!isExporting && (
-          <div className="bg-white/40 backdrop-blur-md border border-white/60 p-4 rounded-2xl shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center ring-1 ring-slate-900/5">
-          <strong className="text-slate-800 uppercase text-xs tracking-widest font-bold">Data Health:</strong>
+          <div className="bg-white border border-slate-200 p-3 rounded-lg shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center">
+          <strong className="text-slate-700 uppercase tracking-wide font-bold">Data Health:</strong>
           
           <div className="flex gap-4">
             <span title="Total employees in final dataset" className="flex items-center gap-1">Valid Employees: <strong className="text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">{data.stats.employeesTotal}</strong></span>
@@ -256,37 +256,31 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-4">
-          <div className="bg-white rounded-3xl p-8 print:p-6 border border-slate-200/60 shadow-sm relative overflow-hidden group hover:shadow-md hover:border-slate-300 transition-all duration-300">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </div>
-              <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
+          <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm relative overflow-hidden transition-all hover:border-slate-300">
+            <div className="flex items-center gap-2 mb-2">
+              <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
             </div>
-            <div className="flex items-baseline mt-5 relative z-10">
-              <p className="text-7xl font-black text-slate-800 tracking-tighter">{totalHoursSaved.toFixed(1)}</p>
-              <span className="text-slate-400 ml-3 text-2xl font-bold tracking-tight">hrs</span>
+            <div className="flex items-baseline mt-4 relative z-10">
+              <p className="text-5xl font-bold text-slate-900 tracking-tight">{totalHoursSaved.toFixed(1)}</p>
+              <span className="text-slate-500 ml-2 text-xl font-semibold">hrs</span>
             </div>
-            <div className="mt-8 border-t border-slate-100 pt-5">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">Methodology</span>
-              <p className="text-sm text-slate-500 mt-2.5 font-medium">Derived from (Repetitive Mins × 60% automation potential) ÷ 60</p>
+            <div className="mt-4">
+              <p className="text-sm text-slate-500 font-medium">Methodology: (Repetitive Mins × 60% automation potential) ÷ 60</p>
             </div>
           </div>
           
-          <div className="bg-white rounded-3xl p-8 print:p-6 border border-slate-200/60 shadow-sm relative overflow-hidden group hover:shadow-md hover:border-slate-300 transition-all duration-300">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </div>
-              <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
+          <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm relative overflow-hidden transition-all hover:border-slate-300">
+            <div className="flex items-center gap-2 mb-2">
+              <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
             </div>
-            <div className="flex items-baseline mt-5 relative z-10">
-              <span className="text-5xl font-bold text-slate-300 mr-2 tracking-tight">₹</span>
-              <p className="text-7xl font-black text-slate-800 tracking-tighter">{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+            <div className="flex items-baseline mt-4 relative z-10">
+              <span className="text-3xl font-semibold text-slate-400 mr-1 tracking-tight">₹</span>
+              <p className="text-5xl font-bold text-slate-900 tracking-tight">{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
             </div>
-            <div className="mt-8 border-t border-slate-100 pt-5">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">Methodology</span>
-              <p className="text-sm text-slate-500 mt-2.5 font-medium">Calculated as: Hours saved × Employee's exact hourly rate</p>
+            <div className="mt-4">
+              <p className="text-sm text-slate-500 font-medium">Methodology: Hours saved × Employee's exact hourly rate</p>
             </div>
           </div>
         </div>
@@ -295,11 +289,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         {!isExporting && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Chart: Time Sink (Dynamic) */}
-          <div className="bg-white/70 backdrop-blur-md p-7 rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60 hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300">
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="font-extrabold text-slate-800 tracking-tight text-lg">Time Sink Breakdown</h3>
+              <h3 className="font-semibold text-slate-800">Time Sink Breakdown</h3>
               <select 
-                className="text-xs border border-slate-200 rounded-lg p-2 bg-slate-50 font-medium text-slate-600 focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer"
+                className="text-xs border border-slate-200 rounded p-1 bg-slate-50 text-slate-600 outline-none cursor-pointer"
                 value={timeSinkDimension}
                 onChange={(e) => setTimeSinkDimension(e.target.value as any)}
               >
@@ -324,8 +318,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           </div>
 
           {/* Chart: WoW Trend */}
-          <div className="bg-white/70 backdrop-blur-md p-7 rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60 hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300">
-            <h3 className="font-extrabold text-slate-800 tracking-tight text-lg mb-6">Repetitive Task Share Trend (WoW)</h3>
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <h3 className="font-semibold text-slate-800 mb-6">Repetitive Task Share Trend (WoW)</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={wowTrend}>
@@ -351,40 +345,40 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         )}
 
         {/* Priority Ranking Table */}
-        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60 overflow-hidden">
-          <div className="p-7 print:p-4 border-b border-slate-100 flex justify-between items-center bg-white/50">
-            <h3 className="font-extrabold text-slate-800 tracking-tight text-lg">Automation Priority Ranking</h3>
-            <span className="text-xs font-semibold text-slate-400 bg-slate-100/50 px-3 py-1.5 rounded-lg">Score = (Vol × Rep% × Conc) + Cost/1k</span>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+            <h3 className="font-semibold text-slate-800">Automation Priority Ranking</h3>
+            <span className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded">Score = (Vol × Rep% × Conc) + Cost/1k</span>
           </div>
           <div className={isExporting ? 'overflow-hidden' : 'overflow-x-auto print:overflow-visible'}>
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50/50 text-slate-500 text-xs uppercase tracking-wider font-bold">
+              <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-4 print:py-2">Task Category</th>
-                  <th className="px-6 py-4 print:py-2">Volume (Hrs)</th>
-                  <th className="px-6 py-4 print:py-2">Repetitive %</th>
-                  <th className="px-6 py-4 print:py-2">Impacted Staff</th>
-                  <th className="px-6 py-4 print:py-2">Cost Impact (₹)</th>
-                  <th className="px-6 py-4 print:py-2">Priority Score</th>
+                  <th className="px-6 py-3 print:py-2">Task Category</th>
+                  <th className="px-6 py-3 print:py-2">Volume (Hrs)</th>
+                  <th className="px-6 py-3 print:py-2">Repetitive %</th>
+                  <th className="px-6 py-3 print:py-2">Impacted Staff</th>
+                  <th className="px-6 py-3 print:py-2">Cost Impact (₹)</th>
+                  <th className="px-6 py-3 print:py-2">Priority Score</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {automationPriority.slice(0, isExporting ? 5 : 8).map((task, idx) => (
                   <tr 
                     key={task.category} 
-                    className="hover:bg-indigo-50/60 cursor-pointer transition-all duration-200 group"
+                    className="hover:bg-slate-50 cursor-pointer transition-colors"
                     onClick={() => setSelectedTaskCategory(task.category === selectedTaskCategory ? null : task.category)}
                   >
-                    <td className="px-6 py-4 font-bold text-slate-700 capitalize flex items-center gap-3">
-                      {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)] ring-2 ring-amber-500/20"></span>}
+                    <td className="px-6 py-4 font-medium text-slate-800 capitalize flex items-center gap-3">
+                      {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-400"></span>}
                       {task.category}
-                      {task.category === selectedTaskCategory && <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full ml-2 font-medium">Filtering</span>}
+                      {task.category === selectedTaskCategory && <span className="text-[10px] uppercase font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded ml-2">Filtering</span>}
                     </td>
                     <td className="px-6 py-4">{task.volumeHours.toFixed(1)}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3 font-medium text-slate-600">
-                        <div className="w-20 bg-slate-100 h-2.5 rounded-full overflow-hidden shadow-inner">
-                          <div className="bg-gradient-to-r from-indigo-500 to-violet-500 h-full rounded-full" style={{ width: `${task.repetitivePercent}%` }}></div>
+                        <div className="w-16 bg-slate-100 h-2 rounded-full overflow-hidden">
+                          <div className="bg-indigo-500 h-full rounded-full" style={{ width: `${task.repetitivePercent}%` }}></div>
                         </div>
                         {task.repetitivePercent.toFixed(0)}%
                       </div>
@@ -401,9 +395,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Employee Drill-Down */}
         {!isExporting && (
-          <div className="bg-white/70 backdrop-blur-md p-7 rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60">
-            <h3 className="font-extrabold text-slate-800 tracking-tight text-lg mb-6">Employee Drill-down (Cross-filtered)</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <h3 className="font-semibold text-slate-800 mb-6">Employee Drill-down (Cross-filtered)</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Show employees who participate in the filtered dataset */}
             {Array.from(new Set(filteredActivities.map(a => a.employeeId))).slice(0, 12).map(empId => {
               const emp = data.employees[empId];
@@ -428,22 +422,22 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               const vsPeer = pct - peerAvg;
               
               return (
-                <div key={empId} className="group border border-white/80 bg-white/50 p-5 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 hover:-translate-y-1 hover:border-indigo-100 transition-all duration-300">
-                  <div className="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">{emp.name}</div>
-                  <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">{emp.role} • {emp.department}</div>
-                  <div className="mt-5 text-sm">
-                    <div className="flex justify-between mb-2">
-                      <span className="font-medium text-slate-600" title={`Peer Average: ${peerAvg.toFixed(1)}%`}>Repetitive Task Load</span>
-                      <span className="font-bold text-slate-700">{pct.toFixed(0)}%</span>
+                <div key={empId} className="border border-slate-200 p-4 rounded-lg bg-white hover:border-slate-300 transition-colors shadow-sm">
+                  <div className="font-bold text-slate-800">{emp.name}</div>
+                  <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mt-1">{emp.role} • {emp.department}</div>
+                  <div className="mt-4 text-sm">
+                    <div className="flex justify-between mb-1">
+                      <span className="text-slate-500" title={`Peer Average: ${peerAvg.toFixed(1)}%`}>Repetitive Task Load</span>
+                      <span className="font-semibold text-slate-700">{pct.toFixed(0)}%</span>
                     </div>
-                    <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden shadow-inner">
-                      <div className={`h-full rounded-full transition-all duration-1000 ${pct > 70 ? 'bg-gradient-to-r from-rose-400 to-rose-500' : 'bg-gradient-to-r from-emerald-400 to-emerald-500'}`} style={{ width: `${pct}%` }}></div>
+                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                      <div className={`h-full rounded-full ${pct > 70 ? 'bg-rose-500' : 'bg-emerald-500'}`} style={{ width: `${pct}%` }}></div>
                     </div>
-                    <div className="flex justify-between mt-3 text-xs font-medium">
-                      <span className="text-slate-500 truncate mr-2 flex items-center gap-1" title="Top Task">
-                        <span className="text-amber-500">★</span> {topTask}
+                    <div className="flex justify-between mt-2 text-[11px] font-medium">
+                      <span className="text-slate-500 truncate mr-2" title="Top Task">
+                        {topTask}
                       </span>
-                      <span className={`px-2 py-0.5 rounded-md ${vsPeer > 0 ? 'bg-rose-50 text-rose-600' : 'bg-emerald-50 text-emerald-600'}`}>
+                      <span className={`${vsPeer > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
                         {vsPeer > 0 ? '+' : ''}{vsPeer.toFixed(1)}% vs Peers
                       </span>
                     </div>
