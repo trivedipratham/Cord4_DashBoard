@@ -169,7 +169,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}} />
-      <div className="p-8 max-w-8xl mx-auto space-y-8" ref={dashboardRef}>
+      <div className="p-8 print:p-0 max-w-8xl mx-auto space-y-8 print:space-y-4" ref={dashboardRef}>
         
         {/* Header & Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
@@ -227,8 +227,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Headline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white shadow-sm rounded-xl p-6 border border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-4">
+          <div className="bg-white shadow-sm rounded-xl p-6 print:p-4 border border-slate-200">
             <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
             <div className="flex items-end mt-2">
               <p className="text-5xl font-black text-indigo-600">{totalHoursSaved.toFixed(1)}</p>
@@ -237,7 +237,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <p className="text-xs text-slate-400 mt-3">Methodology: (Repetitive Minutes * 60% automation potential) / 60</p>
           </div>
           
-          <div className="bg-white shadow-sm rounded-xl p-6 border border-slate-200">
+          <div className="bg-white shadow-sm rounded-xl p-6 print:p-4 border border-slate-200">
             <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
             <div className="flex items-end mt-2">
               <p className="text-5xl font-black text-emerald-600">₹{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
@@ -291,8 +291,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Priority Ranking Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden print:break-inside-avoid">
+          <div className="p-6 print:p-4 border-b border-slate-100 flex justify-between items-center">
             <h3 className="font-bold text-slate-700">Automation Priority Ranking</h3>
             <span className="text-xs text-slate-500">Score = (Vol * Rep% * Conc) + Cost/1k</span>
           </div>
@@ -300,12 +300,12 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500">
                 <tr>
-                  <th className="px-6 py-3 font-medium">Task Category</th>
-                  <th className="px-6 py-3 font-medium">Volume (Hrs)</th>
-                  <th className="px-6 py-3 font-medium">Repetitive %</th>
-                  <th className="px-6 py-3 font-medium">Impacted Staff</th>
-                  <th className="px-6 py-3 font-medium">Cost Impact (₹)</th>
-                  <th className="px-6 py-3 font-medium">Priority Score</th>
+                  <th className="px-6 py-3 print:py-2 font-medium">Task Category</th>
+                  <th className="px-6 py-3 print:py-2 font-medium">Volume (Hrs)</th>
+                  <th className="px-6 py-3 print:py-2 font-medium">Repetitive %</th>
+                  <th className="px-6 py-3 print:py-2 font-medium">Impacted Staff</th>
+                  <th className="px-6 py-3 print:py-2 font-medium">Cost Impact (₹)</th>
+                  <th className="px-6 py-3 print:py-2 font-medium">Priority Score</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -315,13 +315,13 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                     className={`hover:bg-indigo-50/50 cursor-pointer transition-colors ${idx >= 5 ? 'print:hidden' : ''}`}
                     onClick={() => setSelectedTaskCategory(task.category === selectedTaskCategory ? null : task.category)}
                   >
-                    <td className="px-6 py-4 font-medium text-slate-700 capitalize flex items-center gap-2">
+                    <td className="px-6 py-4 print:py-2 font-medium text-slate-700 capitalize flex items-center gap-2">
                       {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-500"></span>}
                       {task.category}
                       {task.category === selectedTaskCategory && <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full ml-2">Filtering</span>}
                     </td>
-                    <td className="px-6 py-4">{task.volumeHours.toFixed(1)}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 print:py-2">{task.volumeHours.toFixed(1)}</td>
+                    <td className="px-6 py-4 print:py-2">
                       <div className="flex items-center gap-2">
                         <div className="w-16 bg-slate-200 h-2 rounded-full overflow-hidden">
                           <div className="bg-indigo-500 h-full" style={{ width: `${task.repetitivePercent}%` }}></div>
@@ -329,9 +329,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                         {task.repetitivePercent.toFixed(0)}%
                       </div>
                     </td>
-                    <td className="px-6 py-4">{task.employees}</td>
-                    <td className="px-6 py-4">₹{task.cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
-                    <td className="px-6 py-4 font-bold text-slate-700">{task.score.toFixed(1)}</td>
+                    <td className="px-6 py-4 print:py-2">{task.employees}</td>
+                    <td className="px-6 py-4 print:py-2">₹{task.cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                    <td className="px-6 py-4 print:py-2 font-bold text-slate-700">{task.score.toFixed(1)}</td>
                   </tr>
                 ))}
               </tbody>
