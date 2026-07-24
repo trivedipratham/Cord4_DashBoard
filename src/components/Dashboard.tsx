@@ -199,8 +199,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             )}
           </div>
           
-          <div className="flex gap-4 mt-4 md:mt-0">
-            {!isExporting && (
+            <div className="flex gap-4 mt-4 md:mt-0">
               <select 
                 className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium"
                 value={selectedDept || ""}
@@ -211,8 +210,6 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                   <option key={dept} value={dept}>{dept}</option>
                 ))}
               </select>
-            )}
-            {!isExporting && (
               <button 
                 onClick={exportPNG}
                 disabled={isExporting}
@@ -220,12 +217,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               >
                 {isExporting ? 'Generating...' : 'Export PDF'}
               </button>
-            )}
           </div>
         </div>
 
         {/* Anomaly Callout */}
-        {!isExporting && anomaly && (
+        {anomaly && (
           <div className="bg-gradient-to-r from-amber-50 to-orange-50/30 border-l-4 border-amber-500 p-5 rounded-r-2xl shadow-sm ring-1 ring-amber-900/5">
             <h3 className="text-amber-800 font-bold text-xs tracking-widest uppercase flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
@@ -346,7 +342,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <h3 className="font-semibold text-slate-800">Automation Priority Ranking</h3>
             <span className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded">Score = (Vol × Rep% × Conc) + Cost/1k</span>
           </div>
-          <div className={isExporting ? 'overflow-hidden' : 'overflow-x-auto print:overflow-visible'}>
+          <div className="overflow-x-auto print:overflow-visible">
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
                 <tr>
