@@ -199,7 +199,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             )}
           </div>
           
-            <div className="flex gap-4 mt-4 md:mt-0">
+            <div className={`flex gap-4 mt-4 md:mt-0 ${isExporting ? 'invisible' : ''}`}>
               <select 
                 className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium"
                 value={selectedDept || ""}
@@ -342,7 +342,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <h3 className="font-semibold text-slate-800">Automation Priority Ranking</h3>
             <span className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded">Score = (Vol × Rep% × Conc) + Cost/1k</span>
           </div>
-          <div className="overflow-x-auto print:overflow-visible">
+          <div className={isExporting ? 'overflow-hidden' : 'overflow-x-auto print:overflow-visible'}>
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
                 <tr>
@@ -441,14 +441,14 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
       </div>
       
       {/* AI Assistant Chat Widget */}
-      {!isExporting && (
+      <div className={isExporting ? 'invisible' : ''}>
         <ChatWidget 
           dataSummary={data.stats} 
           topTasks={automationPriority.slice(0,3)} 
           headline={{hours: totalHoursSaved, inr: totalINRSaved}} 
           fullData={data}
         />
-      )}
+      </div>
     </div>
   )
 }
