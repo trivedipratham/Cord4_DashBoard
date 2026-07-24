@@ -216,7 +216,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               <button 
                 onClick={exportPNG}
                 disabled={isExporting}
-                className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all hover:shadow-md active:scale-95 flex items-center gap-2"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all hover:shadow-md active:scale-95 flex items-center gap-2"
               >
                 {isExporting ? 'Generating...' : 'Export PDF'}
               </button>
@@ -238,8 +238,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         )}
 
         {/* Data Ingestion Stats */}
-        {!isExporting && (
-          <div className="bg-white border border-slate-200 p-3 rounded-lg shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center">
+        <div className="bg-white border border-slate-200 p-3 rounded-lg shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center">
           <strong className="text-slate-700 uppercase tracking-wide font-bold">Data Health:</strong>
           
           <div className="flex gap-4">
@@ -252,7 +251,6 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <span title="Employees in HRMS with no activity logs">No Activity: <strong className="text-amber-600">{data.stats.employeesNoActivity}</strong></span>
           </div>
         </div>
-        )}
 
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-4">
@@ -286,8 +284,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Charts */}
-        {!isExporting && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Chart: Time Sink (Dynamic) */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex justify-between items-center mb-6">
@@ -342,7 +339,6 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             </div>
           </div>
         </div>
-        )}
 
         {/* Priority Ranking Table */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -363,7 +359,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {automationPriority.slice(0, isExporting ? 5 : 8).map((task, idx) => (
+                {automationPriority.slice(0, 8).map((task, idx) => (
                   <tr 
                     key={task.category} 
                     className="hover:bg-slate-50 cursor-pointer transition-colors"
@@ -394,9 +390,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Employee Drill-Down */}
-        {!isExporting && (
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-            <h3 className="font-semibold text-slate-800 mb-6">Employee Drill-down (Cross-filtered)</h3>
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <h3 className="font-semibold text-slate-800 mb-6">Employee Drill-down (Cross-filtered)</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Show employees who participate in the filtered dataset */}
             {Array.from(new Set(filteredActivities.map(a => a.employeeId))).slice(0, 12).map(empId => {
@@ -447,7 +442,6 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             })}
           </div>
         </div>
-        )}
       </div>
       
       {/* AI Assistant Chat Widget */}
