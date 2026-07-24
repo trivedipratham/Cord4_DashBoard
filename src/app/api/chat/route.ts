@@ -22,6 +22,10 @@ export async function POST(req: Request) {
       `${i+1}. ${t.category} (Score: ${t.score.toFixed(1)}, Volume: ${t.volumeHours.toFixed(1)} hrs, Repetitive: ${t.repetitivePercent.toFixed(1)}%, Cost Impact: INR ${t.cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}, Impacted Staff: ${t.employees})`
     ).join('\n')}
 
+    Detailed Raw Data (JSON format) for deep dives:
+    EMPLOYEES: ${JSON.stringify(dataContext?.employees)}
+    ACTIVITIES: ${JSON.stringify(dataContext?.activities)}
+
     Rules:
     - Be concise and professional.
     - Always cite the numbers from the context above.

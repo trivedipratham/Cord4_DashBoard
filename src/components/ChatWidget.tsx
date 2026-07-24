@@ -3,7 +3,7 @@
 import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
-export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
+export default function ChatWidget({ dataSummary, topTasks, headline, fullData }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [localInput, setLocalInput] = useState("");
   const [messages, setMessages] = useState<any[]>([]);
@@ -37,7 +37,9 @@ export default function ChatWidget({ dataSummary, topTasks, headline }: any) {
           dataContext: {
             summary: dataSummary,
             topTasks: topTasks,
-            headline: headline
+            headline: headline,
+            employees: fullData?.employees,
+            activities: fullData?.activities
           }
         })
       });

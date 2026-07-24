@@ -384,7 +384,12 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
       </div>
       
       {/* AI Assistant Chat Widget */}
-      <ChatWidget dataSummary={data.stats} topTasks={automationPriority.slice(0,3)} headline={{hours: totalHoursSaved, inr: totalINRSaved}} />
+      <ChatWidget 
+        dataSummary={data.stats} 
+        topTasks={automationPriority.slice(0,3)} 
+        headline={{hours: totalHoursSaved, inr: totalINRSaved}} 
+        fullData={data}
+      />
     </div>
   )
 }
