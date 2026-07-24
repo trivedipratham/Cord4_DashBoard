@@ -262,8 +262,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
             </div>
             <div className="flex items-end mt-4 relative z-10 gap-1.5">
-              <p className="text-5xl font-extrabold text-slate-900 tracking-tight leading-none">{totalHoursSaved.toFixed(1)}</p>
-              <span className="text-slate-500 text-lg font-bold pb-0.5">hrs</span>
+              <p className="text-4xl font-bold text-slate-800 tracking-tight leading-none">{totalHoursSaved.toFixed(1)}</p>
+              <span className="text-slate-500 text-base font-medium pb-0.5">hrs</span>
             </div>
             <div className="mt-4">
               <p className="text-sm text-slate-500 font-medium">Methodology: (Repetitive Mins × 60% automation potential) ÷ 60</p>
@@ -276,8 +276,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
             </div>
             <div className="flex items-end mt-4 relative z-10 gap-1.5">
-              <span className="text-3xl font-semibold text-slate-400 pb-0.5">₹</span>
-              <p className="text-5xl font-extrabold text-slate-900 tracking-tight leading-none">{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+              <span className="text-2xl font-medium text-slate-400 pb-0.5">₹</span>
+              <p className="text-4xl font-bold text-slate-800 tracking-tight leading-none">{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
             </div>
             <div className="mt-4">
               <p className="text-sm text-slate-500 font-medium">Methodology: Hours saved × Employee's exact hourly rate</p>
