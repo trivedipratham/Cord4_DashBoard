@@ -217,7 +217,6 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               >
                 {isExporting ? 'Generating...' : 'Export PDF'}
               </button>
-            )}
           </div>
         </div>
 
