@@ -10,6 +10,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'
 export default function Dashboard({ data }: { data: IngestionResult }) {
   const [selectedDept, setSelectedDept] = useState<string | null>(null);
   const [selectedTaskCategory, setSelectedTaskCategory] = useState<string | null>(null);
+  const [timeSinkDimension, setTimeSinkDimension] = useState<'app' | 'category' | 'department'>('app');
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
   const dashboardRef = useRef<HTMLDivElement>(null);
 
@@ -40,14 +41,15 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
     return { totalHoursSaved: hours, totalINRSaved: inr };
   }, [filteredActivities, data.employees]);
 
-  // Time sink breakdown by App
-  const appBreakdown = useMemo(() => {
+  // Time sink breakdown (dynamic dimension)
+  const pieBreakdown = useMemo(() => {
     const map: Record<string, number> = {};
     filteredActivities.forEach(a => {
-      map[a.appUsed] = (map[a.appUsed] || 0) + a.durationMinutes;
+      const key = timeSinkDimension === 'app' ? a.appUsed : (timeSinkDimension === 'category' ? a.taskCategory : a.department);
+      map[key] = (map[key] || 0) + a.durationMinutes;
     });
     return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 6);
-  }, [filteredActivities]);
+  }, [filteredActivities, timeSinkDimension]);
 
   // Automation Priority Ranking
   const automationPriority = useMemo(() => {
@@ -236,14 +238,25 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Chart: Time Sink by App */}
+          {/* Chart: Time Sink (Dynamic) */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 className="font-bold text-slate-700 mb-4">Time Sink by Application</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-bold text-slate-700">Time Sink Breakdown</h3>
+              <select 
+                className="text-xs border border-slate-200 rounded p-1"
+                value={timeSinkDimension}
+                onChange={(e) => setTimeSinkDimension(e.target.value as any)}
+              >
+                <option value="app">By App</option>
+                <option value="category">By Category</option>
+                <option value="department">By Department</option>
+              </select>
+            </div>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie data={appBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                    {appBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
+                  <Pie data={pieBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                    {pieBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                   </Pie>
                   <Tooltip formatter={(value: any) => `${(value/60).toFixed(1)} hrs`} />
                 </PieChart>
@@ -330,17 +343,37 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               const total = empActs.reduce((acc, a) => acc + a.durationMinutes, 0);
               const pct = total > 0 ? (rep / total) * 100 : 0;
               
+              // Top Repetitive Task
+              const taskMap: Record<string, number> = {};
+              empActs.filter(a => a.isRepetitive).forEach(a => {
+                taskMap[a.taskCategory] = (taskMap[a.taskCategory] || 0) + a.durationMinutes;
+              });
+              const topTask = Object.entries(taskMap).sort((a, b) => b[1] - a[1])[0]?.[0] || 'None';
+
+              // Peer Comparison
+              const peerActs = data.activities.filter(a => data.employees[a.employeeId]?.role === emp.role);
+              const peerRep = peerActs.filter(a => a.isRepetitive).reduce((acc, a) => acc + a.durationMinutes, 0);
+              const peerTotal = peerActs.reduce((acc, a) => acc + a.durationMinutes, 0);
+              const peerAvg = peerTotal > 0 ? (peerRep / peerTotal) * 100 : 0;
+              const vsPeer = pct - peerAvg;
+              
               return (
                 <div key={empId} className="border border-slate-100 p-4 rounded-lg bg-slate-50 hover:border-indigo-200 transition-colors">
                   <div className="font-bold text-slate-800">{emp.name}</div>
                   <div className="text-xs text-slate-500">{emp.role} • {emp.department}</div>
                   <div className="mt-3 text-sm">
                     <div className="flex justify-between mb-1">
-                      <span>Repetitive Task Load</span>
+                      <span title={`Peer Average: ${peerAvg.toFixed(1)}%`}>Repetitive Task Load</span>
                       <span className="font-medium">{pct.toFixed(0)}%</span>
                     </div>
                     <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                       <div className={`h-full ${pct > 70 ? 'bg-rose-500' : 'bg-emerald-500'}`} style={{ width: `${pct}%` }}></div>
+                    </div>
+                    <div className="flex justify-between mt-1 text-xs">
+                      <span className="text-slate-500 truncate mr-2" title="Top Task">🥇 {topTask}</span>
+                      <span className={vsPeer > 0 ? 'text-rose-500' : 'text-emerald-500'}>
+                        {vsPeer > 0 ? '+' : ''}{vsPeer.toFixed(1)}% vs Peers
+                      </span>
                     </div>
                   </div>
                 </div>
