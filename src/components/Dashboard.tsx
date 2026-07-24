@@ -14,7 +14,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   const [timeSinkDimension, setTimeSinkDimension] = useState<'app' | 'category' | 'department'>('app');
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
-  const dashboardRef = useRef<HTMLDivElement>(null);
+  const exportRef = useRef<HTMLDivElement>(null);
 
   // Filtered activities based on global cross-filters
   const filteredActivities = useMemo(() => {
@@ -163,8 +163,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
     setIsExporting(true);
     setTimeout(async () => {
       try {
-        if (!dashboardRef.current) return;
-        const dataUrl = await toPng(dashboardRef.current, { backgroundColor: '#f8fafc', pixelRatio: 2 });
+        if (!exportRef.current) return;
+        const dataUrl = await toPng(exportRef.current, { backgroundColor: '#f8fafc', pixelRatio: 2 });
         const link = document.createElement('a');
         link.download = 'executive-summary.png';
         link.href = dataUrl;
@@ -185,21 +185,21 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}} />
-      <div className="p-4 md:p-8 print:p-0 max-w-[1400px] mx-auto space-y-5 print:space-y-4" ref={dashboardRef}>
+      <div className="p-4 md:p-8 print:p-0 max-w-[1400px] mx-auto space-y-5 print:space-y-4">
         
         {/* Header & Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-900">Automation Insights</h1>
             <p className="text-slate-500 text-sm mt-1 font-medium">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
-            {(selectedDept || selectedTaskCategory || isExporting) && (
+            {(selectedDept || selectedTaskCategory) && (
               <div className="text-slate-600 text-sm font-medium mt-2">
                 Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
               </div>
             )}
           </div>
           
-            <div className={`flex gap-4 mt-4 md:mt-0 ${isExporting ? 'invisible' : ''}`}>
+          <div className="flex gap-4 mt-4 md:mt-0">
               <select 
                 className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium"
                 value={selectedDept || ""}
@@ -217,6 +217,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               >
                 {isExporting ? 'Generating...' : 'Export PDF'}
               </button>
+            )}
           </div>
         </div>
 
@@ -342,7 +343,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <h3 className="font-semibold text-slate-800">Automation Priority Ranking</h3>
             <span className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded">Score = (Vol × Rep% × Conc) + Cost/1k</span>
           </div>
-          <div className={isExporting ? 'overflow-hidden' : 'overflow-x-auto print:overflow-visible'}>
+          <div className="overflow-x-auto print:overflow-visible">
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
                 <tr>
@@ -441,13 +442,100 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
       </div>
       
       {/* AI Assistant Chat Widget */}
-      <div className={isExporting ? 'invisible' : ''}>
-        <ChatWidget 
-          dataSummary={data.stats} 
-          topTasks={automationPriority.slice(0,3)} 
-          headline={{hours: totalHoursSaved, inr: totalINRSaved}} 
-          fullData={data}
-        />
+      <ChatWidget 
+        dataSummary={data.stats} 
+        topTasks={automationPriority.slice(0,3)} 
+        headline={{hours: totalHoursSaved, inr: totalINRSaved}} 
+        fullData={data}
+      />
+
+      {/* Hidden Export Container */}
+      <div className="absolute top-0 left-[-9999px] print:hidden">
+        <div ref={exportRef} className="w-[1200px] bg-slate-50 p-10 space-y-6">
+          {/* Header */}
+          <div className="flex flex-col justify-between items-start">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">Automation Insights</h1>
+            <p className="text-slate-500 text-sm mt-1 font-medium">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
+            {(selectedDept || selectedTaskCategory) && (
+              <div className="text-slate-600 text-sm font-medium mt-2">
+                Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
+              </div>
+            )}
+          </div>
+
+          {/* Headline Cards */}
+          <div className="grid grid-cols-2 gap-6">
+            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm relative overflow-hidden transition-all hover:border-slate-300">
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
+              </div>
+              <div className="flex items-end mt-4 relative z-10 gap-1.5">
+                <p className="text-4xl font-bold text-slate-800 tracking-tight leading-none">{totalHoursSaved.toFixed(1)}</p>
+                <span className="text-slate-500 text-base font-medium pb-0.5">hrs</span>
+              </div>
+              <div className="mt-4">
+                <p className="text-sm text-slate-500 font-medium">Methodology: (Repetitive Mins × 60% automation potential) ÷ 60</p>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm relative overflow-hidden transition-all hover:border-slate-300">
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
+              </div>
+              <div className="flex items-end mt-4 relative z-10 gap-1.5">
+                <span className="text-2xl font-medium text-slate-400 pb-0.5">₹</span>
+                <p className="text-4xl font-bold text-slate-800 tracking-tight leading-none">{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+              </div>
+              <div className="mt-4">
+                <p className="text-sm text-slate-500 font-medium">Methodology: Hours saved × Employee's exact hourly rate</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Top 5 Table */}
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+              <h3 className="font-semibold text-slate-800">Top 5 Automation Priorities</h3>
+              <span className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded">Score = (Vol × Rep% × Conc) + Cost/1k</span>
+            </div>
+            <table className="w-full text-left text-sm">
+              <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
+                <tr>
+                  <th className="px-6 py-3">Task Category</th>
+                  <th className="px-6 py-3">Volume (Hrs)</th>
+                  <th className="px-6 py-3">Repetitive %</th>
+                  <th className="px-6 py-3">Impacted Staff</th>
+                  <th className="px-6 py-3">Cost Impact (₹)</th>
+                  <th className="px-6 py-3">Priority Score</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {automationPriority.slice(0, 5).map((task, idx) => (
+                  <tr key={task.category}>
+                    <td className="px-6 py-4 font-medium text-slate-800 capitalize flex items-center gap-3">
+                      {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-400"></span>}
+                      {task.category}
+                    </td>
+                    <td className="px-6 py-4">{task.volumeHours.toFixed(1)}</td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3 font-medium text-slate-600">
+                        <div className="w-16 bg-slate-100 h-2 rounded-full overflow-hidden">
+                          <div className="bg-indigo-500 h-full rounded-full" style={{ width: `${task.repetitivePercent}%` }}></div>
+                        </div>
+                        {task.repetitivePercent.toFixed(0)}%
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">{task.employees}</td>
+                    <td className="px-6 py-4">₹{task.cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                    <td className="px-6 py-4 font-bold text-slate-700">{task.score.toFixed(1)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   )
