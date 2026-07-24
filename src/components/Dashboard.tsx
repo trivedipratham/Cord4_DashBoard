@@ -315,6 +315,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               </ResponsiveContainer>
             </div>
           </div>
+        </div>
         )}
 
         {/* Priority Ranking Table */}
