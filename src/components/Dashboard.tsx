@@ -178,7 +178,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   };
 
   return (
-    <div className="min-h-screen relative pb-20">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-50/40 via-slate-50 to-slate-50 relative pb-20 selection:bg-indigo-500 selection:text-white">
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           @page { size: landscape; margin: 12mm; }
@@ -188,10 +188,10 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
       <div className="p-8 print:p-0 max-w-8xl mx-auto space-y-8 print:space-y-4" ref={dashboardRef}>
         
         {/* Header & Controls */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white/60 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/80 ring-1 ring-slate-900/5 transition-all">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-800">Automation Insights</h1>
-            <p className="text-slate-500 text-sm mt-1">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
+            <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">Automation Insights</h1>
+            <p className="text-slate-500 text-sm mt-1.5 font-medium">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
             {(selectedDept || selectedTaskCategory || isExporting) && (
               <div className="text-slate-600 text-sm font-medium mt-2">
                 Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
@@ -216,9 +216,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               <button 
                 onClick={exportPNG}
                 disabled={isExporting}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all hover:shadow-lg hover:shadow-indigo-600/20 active:scale-95 flex items-center gap-2"
               >
-                {isExporting ? 'Generating...' : 'Export PNG'}
+                {isExporting ? 'Generating...' : 'Export PDF'}
               </button>
             )}
           </div>
@@ -226,8 +226,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Anomaly Callout */}
         {!isExporting && anomaly && (
-          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm">
-            <h3 className="text-amber-800 font-bold text-sm uppercase">Anomaly Detected</h3>
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50/30 border-l-4 border-amber-500 p-5 rounded-r-2xl shadow-sm ring-1 ring-amber-900/5">
+            <h3 className="text-amber-800 font-bold text-xs tracking-widest uppercase flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              Anomaly Detected
+            </h3>
             <p className="text-amber-700 text-sm mt-1">
               <strong>{anomaly.name} ({anomaly.dept})</strong> has logged {anomaly.nonRepHrs} hours of non-repetitive work, which is highly atypical (&gt;80% manual variance). Consider reviewing their workflow to see if new processes are missing standardized tools.
             </p>
@@ -236,11 +239,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Data Ingestion Stats */}
         {!isExporting && (
-          <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center">
-          <strong className="text-slate-800 uppercase text-xs tracking-wide">Data Health:</strong>
+          <div className="bg-white/40 backdrop-blur-md border border-white/60 p-4 rounded-2xl shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center ring-1 ring-slate-900/5">
+          <strong className="text-slate-800 uppercase text-xs tracking-widest font-bold">Data Health:</strong>
           
-          <div className="flex gap-3">
-            <span title="Total employees in final dataset">Valid Employees: <strong className="text-indigo-600">{data.stats.employeesTotal}</strong></span>
+          <div className="flex gap-4">
+            <span title="Total employees in final dataset" className="flex items-center gap-1">Valid Employees: <strong className="text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">{data.stats.employeesTotal}</strong></span>
             <span title="Invalid or duplicate employees removed">Dropped Employees: <strong className="text-amber-600">{data.stats.employeesDropped}</strong></span>
             <span title="Total activity logs after cleaning">Valid Logs: <strong className="text-indigo-600">{data.stats.activitiesTotal}</strong></span>
             <span title="Logs with missing employee or duration">Dropped Logs: <strong className="text-amber-600">{data.stats.activitiesDropped}</strong></span>
@@ -253,21 +256,23 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-4">
-          <div className="bg-white shadow-sm rounded-xl p-6 print:p-4 border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
-            <div className="flex items-end mt-2">
-              <p className="text-5xl font-black text-indigo-600">{totalHoursSaved.toFixed(1)}</p>
-              <span className="text-slate-400 ml-2 mb-1 font-medium">hrs</span>
+          <div className="bg-white shadow-xl shadow-slate-200/40 rounded-3xl p-8 print:p-6 border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -mr-10 -mt-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            <h2 className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Hours Recoverable (Monthly)</h2>
+            <div className="flex items-end mt-4 relative z-10">
+              <p className="text-6xl font-black bg-gradient-to-br from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tighter">{totalHoursSaved.toFixed(1)}</p>
+              <span className="text-slate-400 ml-2 mb-2 font-bold tracking-wide">hrs</span>
             </div>
-            <p className="text-xs text-slate-400 mt-3">Methodology: (Repetitive Minutes * 60% automation potential) / 60</p>
+            <p className="text-xs text-slate-400/80 mt-4 font-medium relative z-10">Methodology: (Repetitive Mins × 60% automation potential) / 60</p>
           </div>
           
-          <div className="bg-white shadow-sm rounded-xl p-6 print:p-4 border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
-            <div className="flex items-end mt-2">
-              <p className="text-5xl font-black text-emerald-600">₹{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+          <div className="bg-white shadow-xl shadow-slate-200/40 rounded-3xl p-8 print:p-6 border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full blur-3xl -mr-10 -mt-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            <h2 className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Value Recoverable (Monthly)</h2>
+            <div className="flex items-end mt-4 relative z-10">
+              <p className="text-6xl font-black bg-gradient-to-br from-emerald-500 to-teal-600 bg-clip-text text-transparent tracking-tighter">₹{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
             </div>
-            <p className="text-xs text-slate-400 mt-3">Methodology: Hours saved × Employee's estimated hourly rate</p>
+            <p className="text-xs text-slate-400/80 mt-4 font-medium relative z-10">Methodology: Hours saved × Employee's exact hourly rate</p>
           </div>
         </div>
 
@@ -275,11 +280,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         {!isExporting && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Chart: Time Sink (Dynamic) */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold text-slate-700">Time Sink Breakdown</h3>
+          <div className="bg-white/70 backdrop-blur-md p-7 rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60 hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="font-extrabold text-slate-800 tracking-tight text-lg">Time Sink Breakdown</h3>
               <select 
-                className="text-xs border border-slate-200 rounded p-1"
+                className="text-xs border border-slate-200 rounded-lg p-2 bg-slate-50 font-medium text-slate-600 focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer"
                 value={timeSinkDimension}
                 onChange={(e) => setTimeSinkDimension(e.target.value as any)}
               >
@@ -301,8 +306,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           </div>
 
           {/* Chart: WoW Trend */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 className="font-bold text-slate-700 mb-4">Repetitive Task Share Trend (WoW)</h3>
+          <div className="bg-white/70 backdrop-blur-md p-7 rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60 hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300">
+            <h3 className="font-extrabold text-slate-800 tracking-tight text-lg mb-6">Repetitive Task Share Trend (WoW)</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={wowTrend}>
@@ -319,40 +324,40 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         )}
 
         {/* Priority Ranking Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="p-6 border-b border-slate-100 flex justify-between items-center">
-            <h3 className="font-bold text-slate-700">Automation Priority Ranking</h3>
-            <span className="text-xs text-slate-500">Score = (Vol * Rep% * Conc) + Cost/1k</span>
+        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60 overflow-hidden">
+          <div className="p-7 print:p-4 border-b border-slate-100 flex justify-between items-center bg-white/50">
+            <h3 className="font-extrabold text-slate-800 tracking-tight text-lg">Automation Priority Ranking</h3>
+            <span className="text-xs font-semibold text-slate-400 bg-slate-100/50 px-3 py-1.5 rounded-lg">Score = (Vol × Rep% × Conc) + Cost/1k</span>
           </div>
           <div className={isExporting ? 'overflow-hidden' : 'overflow-x-auto print:overflow-visible'}>
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 text-slate-500">
+              <thead className="bg-slate-50/50 text-slate-500 text-xs uppercase tracking-wider font-bold">
                 <tr>
-                  <th className="px-6 py-3 print:py-2 font-medium">Task Category</th>
-                  <th className="px-6 py-3 print:py-2 font-medium">Volume (Hrs)</th>
-                  <th className="px-6 py-3 print:py-2 font-medium">Repetitive %</th>
-                  <th className="px-6 py-3 print:py-2 font-medium">Impacted Staff</th>
-                  <th className="px-6 py-3 print:py-2 font-medium">Cost Impact (₹)</th>
-                  <th className="px-6 py-3 print:py-2 font-medium">Priority Score</th>
+                  <th className="px-6 py-4 print:py-2">Task Category</th>
+                  <th className="px-6 py-4 print:py-2">Volume (Hrs)</th>
+                  <th className="px-6 py-4 print:py-2">Repetitive %</th>
+                  <th className="px-6 py-4 print:py-2">Impacted Staff</th>
+                  <th className="px-6 py-4 print:py-2">Cost Impact (₹)</th>
+                  <th className="px-6 py-4 print:py-2">Priority Score</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {automationPriority.slice(0, isExporting ? 5 : 8).map((task, idx) => (
                   <tr 
                     key={task.category} 
-                    className="hover:bg-indigo-50/50 cursor-pointer transition-colors"
+                    className="hover:bg-indigo-50/60 cursor-pointer transition-all duration-200 group"
                     onClick={() => setSelectedTaskCategory(task.category === selectedTaskCategory ? null : task.category)}
                   >
-                    <td className="px-6 py-4 font-medium text-slate-700 capitalize flex items-center gap-2">
-                      {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-500"></span>}
+                    <td className="px-6 py-4 font-bold text-slate-700 capitalize flex items-center gap-3">
+                      {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)] ring-2 ring-amber-500/20"></span>}
                       {task.category}
-                      {task.category === selectedTaskCategory && <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full ml-2">Filtering</span>}
+                      {task.category === selectedTaskCategory && <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full ml-2 font-medium">Filtering</span>}
                     </td>
                     <td className="px-6 py-4">{task.volumeHours.toFixed(1)}</td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 bg-slate-200 h-2 rounded-full overflow-hidden">
-                          <div className="bg-indigo-500 h-full" style={{ width: `${task.repetitivePercent}%` }}></div>
+                      <div className="flex items-center gap-3 font-medium text-slate-600">
+                        <div className="w-20 bg-slate-100 h-2.5 rounded-full overflow-hidden shadow-inner">
+                          <div className="bg-gradient-to-r from-indigo-500 to-violet-500 h-full rounded-full" style={{ width: `${task.repetitivePercent}%` }}></div>
                         </div>
                         {task.repetitivePercent.toFixed(0)}%
                       </div>
@@ -369,9 +374,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Employee Drill-Down */}
         {!isExporting && (
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 className="font-bold text-slate-700 mb-4">Employee Drill-down (Cross-filtered)</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="bg-white/70 backdrop-blur-md p-7 rounded-3xl shadow-xl shadow-slate-200/40 border border-white/60">
+            <h3 className="font-extrabold text-slate-800 tracking-tight text-lg mb-6">Employee Drill-down (Cross-filtered)</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {/* Show employees who participate in the filtered dataset */}
             {Array.from(new Set(filteredActivities.map(a => a.employeeId))).slice(0, 12).map(empId => {
               const emp = data.employees[empId];
@@ -396,20 +401,22 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               const vsPeer = pct - peerAvg;
               
               return (
-                <div key={empId} className="border border-slate-100 p-4 rounded-lg bg-slate-50 hover:border-indigo-200 transition-colors">
-                  <div className="font-bold text-slate-800">{emp.name}</div>
-                  <div className="text-xs text-slate-500">{emp.role} • {emp.department}</div>
-                  <div className="mt-3 text-sm">
-                    <div className="flex justify-between mb-1">
-                      <span title={`Peer Average: ${peerAvg.toFixed(1)}%`}>Repetitive Task Load</span>
-                      <span className="font-medium">{pct.toFixed(0)}%</span>
+                <div key={empId} className="group border border-white/80 bg-white/50 p-5 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 hover:-translate-y-1 hover:border-indigo-100 transition-all duration-300">
+                  <div className="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">{emp.name}</div>
+                  <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">{emp.role} • {emp.department}</div>
+                  <div className="mt-5 text-sm">
+                    <div className="flex justify-between mb-2">
+                      <span className="font-medium text-slate-600" title={`Peer Average: ${peerAvg.toFixed(1)}%`}>Repetitive Task Load</span>
+                      <span className="font-bold text-slate-700">{pct.toFixed(0)}%</span>
                     </div>
-                    <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                      <div className={`h-full ${pct > 70 ? 'bg-rose-500' : 'bg-emerald-500'}`} style={{ width: `${pct}%` }}></div>
+                    <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden shadow-inner">
+                      <div className={`h-full rounded-full transition-all duration-1000 ${pct > 70 ? 'bg-gradient-to-r from-rose-400 to-rose-500' : 'bg-gradient-to-r from-emerald-400 to-emerald-500'}`} style={{ width: `${pct}%` }}></div>
                     </div>
-                    <div className="flex justify-between mt-1 text-xs">
-                      <span className="text-slate-500 truncate mr-2" title="Top Task">🥇 {topTask}</span>
-                      <span className={vsPeer > 0 ? 'text-rose-500' : 'text-emerald-500'}>
+                    <div className="flex justify-between mt-3 text-xs font-medium">
+                      <span className="text-slate-500 truncate mr-2 flex items-center gap-1" title="Top Task">
+                        <span className="text-amber-500">★</span> {topTask}
+                      </span>
+                      <span className={`px-2 py-0.5 rounded-md ${vsPeer > 0 ? 'bg-rose-50 text-rose-600' : 'bg-emerald-50 text-emerald-600'}`}>
                         {vsPeer > 0 ? '+' : ''}{vsPeer.toFixed(1)}% vs Peers
                       </span>
                     </div>
