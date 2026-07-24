@@ -256,23 +256,38 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
 
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-4">
-          <div className="bg-white shadow-xl shadow-slate-200/40 rounded-3xl p-8 print:p-6 border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -mr-10 -mt-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <h2 className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Hours Recoverable (Monthly)</h2>
-            <div className="flex items-end mt-4 relative z-10">
-              <p className="text-6xl font-black bg-gradient-to-br from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tighter">{totalHoursSaved.toFixed(1)}</p>
-              <span className="text-slate-400 ml-2 mb-2 font-bold tracking-wide">hrs</span>
+          <div className="bg-white rounded-3xl p-8 print:p-6 border border-slate-200/60 shadow-sm relative overflow-hidden group hover:shadow-md hover:border-slate-300 transition-all duration-300">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Hours Recoverable (Monthly)</h2>
             </div>
-            <p className="text-xs text-slate-400/80 mt-4 font-medium relative z-10">Methodology: (Repetitive Mins × 60% automation potential) / 60</p>
+            <div className="flex items-baseline mt-5 relative z-10">
+              <p className="text-7xl font-black text-slate-800 tracking-tighter">{totalHoursSaved.toFixed(1)}</p>
+              <span className="text-slate-400 ml-3 text-2xl font-bold tracking-tight">hrs</span>
+            </div>
+            <div className="mt-8 border-t border-slate-100 pt-5">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">Methodology</span>
+              <p className="text-sm text-slate-500 mt-2.5 font-medium">Derived from (Repetitive Mins × 60% automation potential) ÷ 60</p>
+            </div>
           </div>
           
-          <div className="bg-white shadow-xl shadow-slate-200/40 rounded-3xl p-8 print:p-6 border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/60 transition-all duration-300 hover:-translate-y-1">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full blur-3xl -mr-10 -mt-10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <h2 className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Value Recoverable (Monthly)</h2>
-            <div className="flex items-end mt-4 relative z-10">
-              <p className="text-6xl font-black bg-gradient-to-br from-emerald-500 to-teal-600 bg-clip-text text-transparent tracking-tighter">₹{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+          <div className="bg-white rounded-3xl p-8 print:p-6 border border-slate-200/60 shadow-sm relative overflow-hidden group hover:shadow-md hover:border-slate-300 transition-all duration-300">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Value Recoverable (Monthly)</h2>
             </div>
-            <p className="text-xs text-slate-400/80 mt-4 font-medium relative z-10">Methodology: Hours saved × Employee's exact hourly rate</p>
+            <div className="flex items-baseline mt-5 relative z-10">
+              <span className="text-5xl font-bold text-slate-300 mr-2 tracking-tight">₹</span>
+              <p className="text-7xl font-black text-slate-800 tracking-tighter">{totalINRSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+            </div>
+            <div className="mt-8 border-t border-slate-100 pt-5">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">Methodology</span>
+              <p className="text-sm text-slate-500 mt-2.5 font-medium">Calculated as: Hours saved × Employee's exact hourly rate</p>
+            </div>
           </div>
         </div>
 
