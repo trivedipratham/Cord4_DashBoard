@@ -2,11 +2,11 @@
 
 import { useState, useMemo, useRef } from "react";
 import { IngestionResult, Activity, Employee } from "@/lib/data";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area, CartesianGrid } from 'recharts';
 import { toPng } from 'html-to-image';
 import ChatWidget from "./ChatWidget";
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
+const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f59e0b', '#10b981'];
 
 export default function Dashboard({ data }: { data: IngestionResult }) {
   const [selectedDept, setSelectedDept] = useState<string | null>(null);
@@ -178,14 +178,14 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-50/40 via-slate-50 to-slate-50 relative pb-20 selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#FAFBFF] relative pb-20 selection:bg-indigo-500 selection:text-white" style={{ backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           @page { size: landscape; margin: 12mm; }
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}} />
-      <div className="p-8 print:p-0 max-w-8xl mx-auto space-y-8 print:space-y-4" ref={dashboardRef}>
+      <div className="p-4 md:p-8 print:p-0 max-w-7xl mx-auto space-y-8 print:space-y-4" ref={dashboardRef}>
         
         {/* Header & Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white/60 backdrop-blur-xl p-6 rounded-3xl shadow-sm border border-white/80 ring-1 ring-slate-900/5 transition-all">
@@ -296,10 +296,13 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie data={pieBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                  <Pie data={pieBreakdown} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={2} stroke="none">
                     {pieBreakdown.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                   </Pie>
-                  <Tooltip formatter={(value: any) => `${(value/60).toFixed(1)} hrs`} />
+                  <Tooltip 
+                    formatter={(value: any) => `${(value/60).toFixed(1)} hrs`} 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', padding: '12px' }}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -310,13 +313,22 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <h3 className="font-extrabold text-slate-800 tracking-tight text-lg mb-6">Repetitive Task Share Trend (WoW)</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={wowTrend}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
-                  <XAxis dataKey="week" axisLine={false} tickLine={false} />
-                  <YAxis unit="%" axisLine={false} tickLine={false} />
-                  <Tooltip formatter={(value: any) => `${value.toFixed(1)}%`} />
-                  <Line type="monotone" dataKey="repetitiveShare" stroke="#00C49F" strokeWidth={3} />
-                </LineChart>
+                <AreaChart data={wowTrend}>
+                  <defs>
+                    <linearGradient id="colorShare" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="week" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dy={10} />
+                  <YAxis unit="%" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dx={-10} />
+                  <Tooltip 
+                    formatter={(value: any) => [`${value.toFixed(1)}%`, 'Repetitive Share']}
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', padding: '12px' }}
+                  />
+                  <Area type="monotone" dataKey="repetitiveShare" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorShare)" activeDot={{ r: 6, strokeWidth: 0, fill: '#8b5cf6' }} />
+                </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
