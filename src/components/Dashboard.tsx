@@ -324,7 +324,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <h3 className="font-bold text-slate-700">Automation Priority Ranking</h3>
             <span className="text-xs text-slate-500">Score = (Vol * Rep% * Conc) + Cost/1k</span>
           </div>
-          <div className="overflow-x-auto print:overflow-visible">
+          <div className={isExporting ? 'overflow-hidden' : 'overflow-x-auto print:overflow-visible'}>
             <table className="w-full text-left text-sm">
               <thead className="bg-slate-50 text-slate-500">
                 <tr>
