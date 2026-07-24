@@ -200,6 +200,21 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           </div>
         )}
 
+        {/* Data Ingestion Stats */}
+        <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center print:hidden">
+          <strong className="text-slate-800 uppercase text-xs tracking-wide">Data Health:</strong>
+          
+          <div className="flex gap-3">
+            <span title="Total employees in final dataset">Valid Employees: <strong className="text-indigo-600">{data.stats.employeesTotal}</strong></span>
+            <span title="Invalid or duplicate employees removed">Dropped Employees: <strong className="text-amber-600">{data.stats.employeesDropped}</strong></span>
+            <span title="Total activity logs after cleaning">Valid Logs: <strong className="text-indigo-600">{data.stats.activitiesTotal}</strong></span>
+            <span title="Logs with missing employee or duration">Dropped Logs: <strong className="text-amber-600">{data.stats.activitiesDropped}</strong></span>
+            <span title="Logs with formatting anomalies that were repaired">Fixed/Flagged Logs: <strong className="text-indigo-600">{data.stats.activitiesFixed}</strong></span>
+            <span title="Employees in logs with no HRMS metadata">No Metadata: <strong className="text-amber-600">{data.stats.employeesNoMetadata}</strong></span>
+            <span title="Employees in HRMS with no activity logs">No Activity: <strong className="text-amber-600">{data.stats.employeesNoActivity}</strong></span>
+          </div>
+        </div>
+
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white shadow-sm rounded-xl p-6 border border-slate-200">

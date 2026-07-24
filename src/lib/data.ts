@@ -32,6 +32,8 @@ export interface IngestionResult {
     activitiesTotal: number;
     activitiesDropped: number;
     activitiesFixed: number;
+    employeesNoMetadata: number;
+    employeesNoActivity: number;
   };
 }
 
@@ -189,6 +191,19 @@ export function getCleanData(): IngestionResult {
     });
   }
 
+  const empIdsWithActivity = new Set(activities.map(a => a.employeeId));
+  let employeesNoActivity = 0;
+  let employeesNoMetadata = 0;
+
+  for (const empId of Object.keys(employeesMap)) {
+    if (employeesMap[empId].status === 'unknown') {
+      employeesNoMetadata++;
+    }
+    if (!empIdsWithActivity.has(empId)) {
+      employeesNoActivity++;
+    }
+  }
+
   const result: IngestionResult = {
     employees: employeesMap,
     activities,
@@ -198,6 +213,8 @@ export function getCleanData(): IngestionResult {
       activitiesTotal: activities.length,
       activitiesDropped,
       activitiesFixed,
+      employeesNoMetadata,
+      employeesNoActivity,
     }
   };
 
