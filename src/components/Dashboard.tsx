@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef } from "react";
 import { IngestionResult, Activity, Employee } from "@/lib/data";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid } from 'recharts';
+import { toPng } from 'html-to-image';
 import ChatWidget from "./ChatWidget";
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
@@ -12,6 +13,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
   const [selectedTaskCategory, setSelectedTaskCategory] = useState<string | null>(null);
   const [timeSinkDimension, setTimeSinkDimension] = useState<'app' | 'category' | 'department'>('app');
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
   const dashboardRef = useRef<HTMLDivElement>(null);
 
   // Filtered activities based on global cross-filters
@@ -157,8 +159,22 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
     return outlier;
   }, [data.activities, data.employees]);
 
-  const exportPDF = () => {
-    window.print();
+  const exportPNG = () => {
+    setIsExporting(true);
+    setTimeout(async () => {
+      try {
+        if (!dashboardRef.current) return;
+        const dataUrl = await toPng(dashboardRef.current, { backgroundColor: '#f8fafc', pixelRatio: 2 });
+        const link = document.createElement('a');
+        link.download = 'executive-summary.png';
+        link.href = dataUrl;
+        link.click();
+      } catch (err) {
+        console.error('Failed to export', err);
+      } finally {
+        setIsExporting(false);
+      }
+    }, 150);
   };
 
   return (
@@ -176,34 +192,41 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-800">Automation Insights</h1>
             <p className="text-slate-500 text-sm mt-1">Data covers {new Date(data.activities[0]?.date).toLocaleDateString()} to {new Date(data.activities[data.activities.length - 1]?.date).toLocaleDateString()}</p>
-            <div className="hidden print:block text-slate-600 text-sm font-medium mt-2">
-              Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
-            </div>
+            {(selectedDept || selectedTaskCategory || isExporting) && (
+              <div className="text-slate-600 text-sm font-medium mt-2">
+                Filter: {selectedDept || 'Company Wide'} {selectedTaskCategory ? ` • Task: ${selectedTaskCategory}` : ''}
+              </div>
+            )}
           </div>
           
           <div className="flex gap-4 mt-4 md:mt-0">
-            <select 
-              className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium print:hidden"
-              value={selectedDept || ""}
-              onChange={(e) => setSelectedDept(e.target.value || null)}
-            >
-              <option value="">All Departments</option>
-              {Array.from(new Set(data.activities.map(a => a.department))).filter(Boolean).map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-              ))}
-            </select>
-            <button 
-              onClick={exportPDF}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors print:hidden"
-            >
-              Export PDF
-            </button>
+            {!isExporting && (
+              <select 
+                className="p-2 border border-slate-200 rounded-md shadow-sm bg-slate-50 text-sm font-medium"
+                value={selectedDept || ""}
+                onChange={(e) => setSelectedDept(e.target.value || null)}
+              >
+                <option value="">All Departments</option>
+                {Array.from(new Set(data.activities.map(a => a.department))).filter(Boolean).map(dept => (
+                  <option key={dept} value={dept}>{dept}</option>
+                ))}
+              </select>
+            )}
+            {!isExporting && (
+              <button 
+                onClick={exportPNG}
+                disabled={isExporting}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors"
+              >
+                {isExporting ? 'Generating...' : 'Export PNG'}
+              </button>
+            )}
           </div>
         </div>
 
         {/* Anomaly Callout */}
-        {anomaly && (
-          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm print:hidden">
+        {!isExporting && anomaly && (
+          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm">
             <h3 className="text-amber-800 font-bold text-sm uppercase">Anomaly Detected</h3>
             <p className="text-amber-700 text-sm mt-1">
               <strong>{anomaly.name} ({anomaly.dept})</strong> has logged {anomaly.nonRepHrs} hours of non-repetitive work, which is highly atypical (&gt;80% manual variance). Consider reviewing their workflow to see if new processes are missing standardized tools.
@@ -212,7 +235,8 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         )}
 
         {/* Data Ingestion Stats */}
-        <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center print:hidden">
+        {!isExporting && (
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-sm text-xs text-slate-600 flex flex-wrap gap-4 items-center">
           <strong className="text-slate-800 uppercase text-xs tracking-wide">Data Health:</strong>
           
           <div className="flex gap-3">
@@ -225,6 +249,7 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             <span title="Employees in HRMS with no activity logs">No Activity: <strong className="text-amber-600">{data.stats.employeesNoActivity}</strong></span>
           </div>
         </div>
+        )}
 
         {/* Headline Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-4">
@@ -246,7 +271,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 print:hidden">
+        {/* Charts */}
+        {!isExporting && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Chart: Time Sink (Dynamic) */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
             <div className="flex justify-between items-center mb-4">
@@ -288,11 +315,11 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
               </ResponsiveContainer>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Priority Ranking Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden print:break-inside-avoid">
-          <div className="p-6 print:p-4 border-b border-slate-100 flex justify-between items-center">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="p-6 border-b border-slate-100 flex justify-between items-center">
             <h3 className="font-bold text-slate-700">Automation Priority Ranking</h3>
             <span className="text-xs text-slate-500">Score = (Vol * Rep% * Conc) + Cost/1k</span>
           </div>
@@ -309,19 +336,19 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {automationPriority.slice(0, 8).map((task, idx) => (
+                {automationPriority.slice(0, isExporting ? 5 : 8).map((task, idx) => (
                   <tr 
                     key={task.category} 
-                    className={`hover:bg-indigo-50/50 cursor-pointer transition-colors ${idx >= 5 ? 'print:hidden' : ''}`}
+                    className="hover:bg-indigo-50/50 cursor-pointer transition-colors"
                     onClick={() => setSelectedTaskCategory(task.category === selectedTaskCategory ? null : task.category)}
                   >
-                    <td className="px-6 py-4 print:py-2 font-medium text-slate-700 capitalize flex items-center gap-2">
+                    <td className="px-6 py-4 font-medium text-slate-700 capitalize flex items-center gap-2">
                       {idx < 3 && <span className="w-2 h-2 rounded-full bg-amber-500"></span>}
                       {task.category}
                       {task.category === selectedTaskCategory && <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full ml-2">Filtering</span>}
                     </td>
-                    <td className="px-6 py-4 print:py-2">{task.volumeHours.toFixed(1)}</td>
-                    <td className="px-6 py-4 print:py-2">
+                    <td className="px-6 py-4">{task.volumeHours.toFixed(1)}</td>
+                    <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <div className="w-16 bg-slate-200 h-2 rounded-full overflow-hidden">
                           <div className="bg-indigo-500 h-full" style={{ width: `${task.repetitivePercent}%` }}></div>
@@ -329,9 +356,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
                         {task.repetitivePercent.toFixed(0)}%
                       </div>
                     </td>
-                    <td className="px-6 py-4 print:py-2">{task.employees}</td>
-                    <td className="px-6 py-4 print:py-2">₹{task.cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
-                    <td className="px-6 py-4 print:py-2 font-bold text-slate-700">{task.score.toFixed(1)}</td>
+                    <td className="px-6 py-4">{task.employees}</td>
+                    <td className="px-6 py-4">₹{task.cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                    <td className="px-6 py-4 font-bold text-slate-700">{task.score.toFixed(1)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -340,8 +367,9 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
         </div>
 
         {/* Employee Drill-Down */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 print:hidden">
-          <h3 className="font-bold text-slate-700 mb-4">Employee Drill-down (Cross-filtered)</h3>
+        {!isExporting && (
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h3 className="font-bold text-slate-700 mb-4">Employee Drill-down (Cross-filtered)</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Show employees who participate in the filtered dataset */}
             {Array.from(new Set(filteredActivities.map(a => a.employeeId))).slice(0, 12).map(empId => {
@@ -390,15 +418,18 @@ export default function Dashboard({ data }: { data: IngestionResult }) {
             })}
           </div>
         </div>
+        )}
       </div>
       
       {/* AI Assistant Chat Widget */}
-      <ChatWidget 
-        dataSummary={data.stats} 
-        topTasks={automationPriority.slice(0,3)} 
-        headline={{hours: totalHoursSaved, inr: totalINRSaved}} 
-        fullData={data}
-      />
+      {!isExporting && (
+        <ChatWidget 
+          dataSummary={data.stats} 
+          topTasks={automationPriority.slice(0,3)} 
+          headline={{hours: totalHoursSaved, inr: totalINRSaved}} 
+          fullData={data}
+        />
+      )}
     </div>
   )
 }
